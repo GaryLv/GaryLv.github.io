@@ -136,7 +136,7 @@ $$
 可以直观的感觉到可以通过一条直线将其分成两类。根据随机梯度下降的迭代公式，Python代码如下
 
 ```python
-    def logistic_regression(data, label, alpha = 0.001):    
+def logistic_regression(data, label, alpha = 0.001):    
     n, m = np.shape(data)
     w = np.ones(m)
     for times in range(1000):
