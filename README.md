@@ -2,7 +2,7 @@
 
 ###[View Live Guan Blog &rarr;](http://garylv.github.io/)
 
-![](/img/preface.png)
+![](http://7xqutp.com1.z0.glb.clouddn.com/preface.PNG)
 
 ## Introduction
 
