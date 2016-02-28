@@ -3,12 +3,13 @@ layout: post
 title:  "Python 数组的基本操作"
 date:   2016-02-15
 author: Run.D.Guan
+header-img: "img/post-bg-digital-native.jpg"
 category: Python
-tags: [python]
+tags:
+    - Python-Array
 ---
 
-
-> 向量化计算在数据分析中很常用，与数学公式最为相近，又可简化代码。Numpy是Python的一个扩展库，支持高阶维度数组和矩阵运算，Numpy的array 类称为ndarray，也被称为array。这里对其运算进行简单的介绍做为学习与查询之用。 
+> 向量化计算在数据分析中很常用，与数学公式最为相近，又可简化代码。Numpy是Python的一个扩展库，支持高阶维度数组和矩阵运算，Numpy的array 类称为ndarray，也被称为array。这里对其运算进行简单的介绍做为学习与查询之用。
 
 ```python
 import numpy as np
@@ -165,7 +166,7 @@ print('That means A has %d row' % A.shape[0], 'and %d columns.' % A.shape[1])
      [ 13.  14.  15.]]
     A is a numpy array with shape (5, 3)
     That means A has 5 row and 3 columns.
-    
+
 
 
 ```python
@@ -177,13 +178,13 @@ print(A[0:3])
 ```
 
     跟普通的list一样，我们可以按行索引
-    A[0] = 
+    A[0] =
     [ 1.  2.  3.]
-    A[0:3] = 
+    A[0:3] =
     [[ 1.  2.  3.]
      [ 4.  5.  6.]
      [ 7.  8.  9.]]
-    
+
 
 
 ```python
@@ -196,12 +197,12 @@ print(A[0, 0])
 ```
 
     我们可以笨拙的提取一行第一个元素：
-    A[0][0] = 
+    A[0][0] =
     1.0
     但是一种更简洁的方式为：
-    A[0,0] = 
+    A[0,0] =
     1.0
-    
+
 
 
 ```python
@@ -211,10 +212,10 @@ print(A[0:2, :])
 ```
 
     Rows and columns can be sliced like Python lists:
-    A[0:2,:] = 
+    A[0:2,:] =
     [[ 1.  2.  3.]
      [ 4.  5.  6.]]
-    
+
 
 
 ```python
@@ -227,7 +228,7 @@ print(A[np.ix_([0, 3, 4], [0, 2])])
     [[  1.   3.]
      [ 10.  12.]
      [ 13.  15.]]
-    
+
 
 ### Work with arrays
 
@@ -245,7 +246,7 @@ print('Mean: ' + repr(mu))
 ```
 
     Mean: array([ 7.,  8.,  9.])
-    
+
 
 可以采用 "mean" 函数来完成上述的工作
 
@@ -256,7 +257,7 @@ print('Mean: ', repr(mu))
 ```
 
     Mean:  array([ 7.,  8.,  9.])
-    
+
 
 令每列0均值化，即每列都减去均值
 
@@ -275,7 +276,7 @@ print('Cols centered:\n' + repr(A_shift))
            [ 0.,  0.,  0.],
            [ 3.,  3.,  3.],
            [ 6.,  6.,  6.]])
-    
+
 
 该过程可以按行减去均值
 
@@ -293,7 +294,7 @@ print('Cols centered:\n' + repr(A_shift))
            [ 0.,  0.,  0.],
            [ 3.,  3.,  3.],
            [ 6.,  6.,  6.]])
-    
+
 
 来使每行的均值为0
 
@@ -340,7 +341,7 @@ print('tallest_person = %s' % tallest_person)
 
     largest_height = 180
     tallest_person = Jim
-    
+
 
 当然啦，这么典型的问题肯定有内建函数来解决
 
@@ -351,7 +352,7 @@ print('largest_height = %g' % largest_height)
 ```
 
     largest_height = 180
-    
+
 
 
 ```python
@@ -365,7 +366,7 @@ print('tallest_person = %s' % tallest_person)
 
     largest_height = 180
     tallest_person = Jim
-    
+
 
 
 ```python
@@ -385,7 +386,7 @@ print('smallest_people: ' + repr(smallest_people))
 ```
 
     smallest_people: ['alice', 'ali']
-    
+
 
 **sort (height_cm)** sorts the list. Again, a second argument will give the indexes of the corresponding items.
 
@@ -398,7 +399,7 @@ sorted_heights = height_cm[ids]
 ```
 
     sorted_heights: array([165, 165, 178, 180])
-    
+
 
 
 ```python
@@ -411,7 +412,7 @@ print('people_in_height_order: ' + repr(people_in_height_order))
 
     sorted_heights: array([165, 165, 178, 180])
     people_in_height_order: ['alice', 'ali', 'bob', 'Jim']
-    
+
 
 ### 矩阵操作 “向量化”
 
