@@ -1,10 +1,14 @@
 ---
 layout: post
 title:  "Logistic Regression"
+subtitle:   ""
 date:   2016-02-21
 author: Run.D.Guan
+header-img: "img/post-bg-miui6.jpg"
 category: Machine-learning
-tags: [supervised-learning]
+tags:
+    - Supervised-Learning
+    - Classification
 ---
 
 我们这回来谈论下分类问题，跟回归问题不同，它的输出是离散值，以表征属于哪一类，而不同于回归的输出连续域的值。那如何判定属于哪一类呢，可以通过概率来给出结果。对于简单的二分类问题，如果属于正类的概率 $P_+$ 大于负类的概率 $ P_-=1-P_+$，那么可以断定它属于正类，输出1，反之则输出0。

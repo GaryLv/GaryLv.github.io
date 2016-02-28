@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "线性回归"
+title:  "Linear Regression"
 date:   2016-02-06
 author: Run.D.Guan
+header-img: "img/post-bg-2015.jpg"
 category: Machine-learning
-tags: [supervised-learning]
+tags:
+    - Supervised-Learning
+    - Regression
 ---
 
 ### 线性回归背景

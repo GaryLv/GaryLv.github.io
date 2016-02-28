@@ -2,13 +2,16 @@
 layout: post
 title:  "Example Post Formatting"
 date:   2016-01-05
-author: Run.D.Guan
-category: 
-tags: []
+author: Author's name
+header-img: "img/home-bg.jpg"
+category: Formatting
+tags:
+    - Template
+    -
 ---
 
-<p class="intro"><span class="dropcap"></span>Introduction to linear regression with one variable.</p>
-测试测试测试
+<p class="intro"><span class="dropcap"></span>Introduction to Machine Learning in Python.</p>
+
 
 # Heading 1
 
@@ -56,9 +59,6 @@ Nullam quis risus eget urna mollis ornare vel eu leo. Cras mattis consectetur pu
 Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
 
     Hello World!
-    Markdown 
+    Markdown
 
 ![pic](img/Screenshot1.png)
-
-
-
