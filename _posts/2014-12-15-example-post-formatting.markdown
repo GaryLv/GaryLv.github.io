@@ -61,4 +61,4 @@ Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit t
     Hello World!
     Markdown
 
-![pic](img/post-sample-image.jpg)
+![pic](/img/post-sample-image.jpg)
