@@ -171,7 +171,9 @@ $$
                         x_2^6
                     \end{bmatrix}
 $$
+
 与以往上来拿着样本的属性值就用不同，这回要做多项式特征，代码如下：
+
 ```python
 def feature_set(d, e):     # e为最高幂次和，且默认d[0]=1
     features = [1]
@@ -180,9 +182,11 @@ def feature_set(d, e):     # e为最高幂次和，且默认d[0]=1
             features.append(pow(d[1],n-i) * pow(d[2],i))
     return features
 ```
+
 这里有个问题就需要思考一下了，好像之前讲的线性回归和现在的logistic regression都是线性模型，现在弄了一堆特征乘在了一起，是不是说明LR就是非线性模型了呢？嗯。。不是的，它还是线性模型。因为线不线性看的是你模型参数（这里的 $\theta$ ）是不是线性的，它没有做任何的非线性变换，所以是线性的。 那些属性值乘来乘去，好像非线性很高，其实乘完了不就是一个数值而已，不影响模型的线性度。其实LR是一种广义的线性回归。
 
 那么根据梯度下降法，计算模型参数过程如下（带正则化项 $\lambda$ ）
+
 ```python
 def logistic_regression(data, label, alpha = 0.01, lamda = 0.001):   
     n, m = np.shape(data)
@@ -194,9 +198,11 @@ def logistic_regression(data, label, alpha = 0.01, lamda = 0.001):
         w = w + alpha * gradient  + lamda*w
     return w
 ```
+
 计算出参数后，根据 $h_\theta(x)=g(\theta^Tx)=0$ ，就可做出分界面来，其中 $g(\cdot)$ 为sigmoid函数，结果可视化如下
-![nb](http://7xqutp.com1.z0.glb.clouddn.com/non2.png)
-这个结果还是不错的，这个正则化项要是小的话，结果就是边界曲线很弯曲，普适性差；正则化项大了的话就是精度低，会有好多错误的分类结果。
+![nb](http://7xqutp.com1.z0.glb.clouddn.com/non2.png?imageView/2/w/500/q/90)
+
+分类结果还是不错的，这个正则化项要是小的话，结果就是边界曲线很弯曲，普适性差；正则化项大了的话就是精度低，会有好多错误的分类结果。
 
 ### **Example 3** -- Multi-classification with scikit-learn
 这里我们采用的数据是著名的[Iris Data Set](http://archive.ics.uci.edu/ml/datasets/Iris)，Iris是以鸢尾花的特征作为数据来源，数据集包含150个数据集，分为3类（Iris setosa, Iris virginica and Iris versicolor），每类50个数据，每个数据包含4个属性，为萼片和花瓣的长度和宽度。为突出LR的分类结果，简化其他过程，这里我们只选取花瓣的长度和宽度这两种属性。
