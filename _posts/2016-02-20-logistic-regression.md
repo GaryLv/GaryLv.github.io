@@ -58,7 +58,7 @@ $$
 
 先来考察下这个 sigmoid function 有什么有用的性质:
 
-$\bullet \quad  g(-z) = 1-g(z) $
+$\bullet \quad  g(-z) = 1-g(z)$
 
 $\bullet \quad  g'(z) = g(z)(1-g(z))$
 
@@ -152,7 +152,27 @@ def logistic_regression(data, label, alpha = 0.001):
 
 分类结果还是不错的，可以对其进行其他应用。
 
-### **Example 2** -- Multi-classification with scikit-learn
+### **Example 2** -- Nonlinear decision boundary
+下面来做一个非线性分类边界的问题，问题背景是这样的：工厂生产的芯片有两种测量标准，我们要根据这两种测量标准判断芯片是否质量合格。数据源于[Andrew Ng的课程](https://www.coursera.org/learn/machine-learning/programming/ixFof/logistic-regression)。首先我们还是先来观察下数据
+![non](http://7xqutp.com1.z0.glb.clouddn.com/non1.png?imageView/2/w/500/q/90)
+可以看出边界是个圆弧形，这时要对自身那两个属性值（ $x_1, x_2$ ）做下多项式变换以应对非线性边界。这里我们来点狠的，让多项式最高幂次为6，这样的好处是 -- 可以练习下正则化 -.-! 这时属性向量如下：
+
+$$
+\text{mapFeature}(x)=\begin{bmatrix}
+                        1 \\
+                        x_1 \\
+                        x_2 \\
+                        x_1^2 \\
+                        x_1x_2 \\
+                        x_2^2 \\
+                        x_1^3 \\
+                        \vdots \\
+                        x_1x_2^5 \\
+                        x_2^6
+                    \end{bmatrix}
+$$
+
+### **Example 3** -- Multi-classification with scikit-learn
 这里我们采用的数据是著名的[Iris Data Set](http://archive.ics.uci.edu/ml/datasets/Iris)，Iris是以鸢尾花的特征作为数据来源，数据集包含150个数据集，分为3类（Iris setosa, Iris virginica and Iris versicolor），每类50个数据，每个数据包含4个属性，为萼片和花瓣的长度和宽度。为突出LR的分类结果，简化其他过程，这里我们只选取花瓣的长度和宽度这两种属性。
 
 ```python
