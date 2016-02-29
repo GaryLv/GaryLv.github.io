@@ -172,7 +172,7 @@ $$
                     \end{bmatrix}
 $$
 
-与以往上来拿着样本的属性值就用不同，这回要做多项式特征，代码如下：
+与以往上来拿着样本的属性值就用不同，这回要做多项式特征变换，代码如下：
 
 ```python
 def feature_set(d, e):     # e为最高幂次和，且默认d[0]=1
@@ -183,8 +183,7 @@ def feature_set(d, e):     # e为最高幂次和，且默认d[0]=1
     return features
 ```
 
-这里有个问题就需要思考一下了，好像之前讲的线性回归和现在的logistic regression都是线性模型，现在弄了一堆特征乘在了一起，是不是说明LR就是非线性模型了呢？嗯。。不是的，它还是线性模型。因为线不线性看的是你模型参数（这里的 $\theta$ ）是不是线性的，它没有做任何的非线性变换，所以是线性的。 那些属性值乘来乘去，好像非线性很高，其实乘完了不就是一个数值而已，不影响模型的线性度。其实LR是一种广义的线性回归。
-
+这里有个问题就需要思考一下了，好像之前讲的线性回归和现在的logistic regression都是线性模型，现在弄了一堆特征乘在了一起，是不是说明LR就是非线性模型了呢？嗯。。不是的，它还是线性模型。因为线不线性看的是你模型参数（这里的 $\theta$ ）是不是线性的，它没有做任何的非线性变换，所以是线性的。 那些属性值乘来乘去，好像非线性很高，其实乘完了不就是一个数值而已，不影响模型的线性度。其实LR是一种广义的线性回归。<br>
 那么根据梯度下降法，计算模型参数过程如下（带正则化项 $\lambda$ ）
 
 ```python
@@ -252,4 +251,5 @@ plot_decision_regions(X_combined_std, y_combined, classifier=lr)
 * [https://codesachin.wordpress.com/2015/08/16/logistic-regression-for-dummies/](https://codesachin.wordpress.com/2015/08/16/logistic-regression-for-dummies/)
 * [http://www.52caml.com/head_first_ml/ml-chapter1-regression-family/](http://www.52caml.com/head_first_ml/ml-chapter1-regression-family/)
 * [https://www.coursera.org/learn/machine-learning](https://www.coursera.org/learn/machine-learning)
+* [https://www.coursera.org/learn/machine-learning/home/week/3](https://www.coursera.org/learn/machine-learning/home/week/3)
 *  S. Raschka, Python Machine Learning, Packt Publishing, 2015.
