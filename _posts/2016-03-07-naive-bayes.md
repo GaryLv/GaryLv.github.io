@@ -47,9 +47,9 @@ $$
 
 其中，
 
-* $P(C_{k}|\mathbf{x})$ 为给定观测 $\mathbf{x}$ 后，类的后验概率（posterior probability）
+*  $P(C_{k} | \mathbf{x})$ 为给定观测 $\mathbf{x}$ 后，类的后验概率（posterior probability）
 * $P(C_k)$ 为类 $C_k$ 的先验概率（prior probability）
-* \(P(\mathbf{x}\text{|}C_{k})\) 为给定类的似然值（class likelihood）
+* \(P(\mathbf{x}\text{}C_{k})\) 为给定类的似然值（class likelihood）
 * $P(\mathbf{x})$ 为证据（evidence）
 
 为将误差最小化，贝叶斯分类器选择具有最大后验概率的类，即
