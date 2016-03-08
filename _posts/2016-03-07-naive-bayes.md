@@ -36,22 +36,17 @@ $$
 ### 朴素贝叶斯分类器
 现在我们考虑的是分类问题，设样本的特征向量 $\mathbf{x}=(x_1, x_2, \ldots, x_D)$，要将其分到类 $C_k$ 中，现重写贝叶斯公式如下：
 
-$$
-
-    P(A|B)=\dfrac{P(B|A)P(A)}{P(B)}
-
-$$
 
 其中，
-* $P(C_k|\mathbf{x})$ 为给定观测 $\mathbf{x}$ 后，类 $C_k$ 的后验概率（posterior probability）
-* $P(C_k)$ 为类 $C_k$ 的先验概率（prior probability）
-* $P(\mathbf{x}|C_k)$ 为给定类的似然值（class likelihood）
-* $P(\mathbf{x})$ 为证据（evidence）
+*  $P(C_k|\mathbf{x})$ 为给定观测 $\mathbf{x}$ 后，类 $C_k$ 的后验概率（posterior probability）
+*  $P(C_k)$ 为类 $C_k$ 的先验概率（prior probability）
+*  $P(\mathbf{x}|C_k)$ 为给定类的似然值（class likelihood）
+*  $P(\mathbf{x})$ 为证据（evidence）
 
 为将误差最小化，贝叶斯分类器选择具有最大后验概率的类，即
 
 $$
-\text{选择 }C_i \text{ 如果 } P(C_i|\mathbf{x})=\underset{k}{\mathop{\max }}\,P({{C}_{k}}|\mathbf{x})
+\text{选择 }C_i \text{ 如果 } P(C_i|\mathbf{x})=\underset{k}{\max }\,P({C_k}|\mathbf{x})
 $$
 
 
