@@ -46,7 +46,6 @@ P(C_k|\mathbf{x}) &=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}\\
 $$
 
 其中，
-
 *  $$P(C_{k} | \mathbf{x})$$
 为给定观测
 $$\mathbf{x}$$
