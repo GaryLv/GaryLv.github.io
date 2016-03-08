@@ -90,11 +90,20 @@ $$
 
 #### 朴素贝叶斯分类器举例
 
-能通过手头计算对理解算法是很有帮助的，[这里](http://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn06-notes-nup.pdf)有个不错的例子，但是它缺少2种情形，所以这里就不展开讨论它了，不过它还是值得一看的。我选取了《数据挖掘导论》预测一个贷款人是否会拖欠还款的例子。假定训练集有如下属性：有房，婚姻状况和年收入。拖欠还款的贷款者属于类Y，还清贷款的属于类N。训练集如下表所示
+能通过手头计算对理解算法是很有帮助的，[这里](http://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn06-notes-nup.pdf)有个不错的例子，但是它缺少2种情形，所以这里就不展开讨论它了，不过它还是值得一看的。我选取了《数据挖掘导论》里预测一个贷款人是否会拖欠还款的例子。假定训练集有如下属性：有房，婚姻状况和年收入。拖欠还款的贷款者属于类Y，还清贷款的属于类N。训练集如下表所示
 
 ![table](http://7xqutp.com1.z0.glb.clouddn.com/tableNY.png)
 
-给定以测试记录 $\mathbf{x}$ =(有房=N，婚姻状况=已婚，年收入=120k)，预测他是否会拖欠贷款。
+给定以测试记录 $\mathbf{x}$ =(有房=N，婚姻状况=已婚，年收入=120k)，预测他是否会拖欠贷款。<br>
+| 有房        | Y        | N  |                
+|:-------------: |:-------------:|:-----:|     
+| Y      | 0| 3/7 |                                
+|N     | 1     |   4/7 |
+
+|婚姻状况   |Y      |   N   |
+|:-------:| :-----:|:------:|
+
+
 ### Reference
 
 * [https://en.wikipedia.org/wiki/Bayes%27_theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem)
