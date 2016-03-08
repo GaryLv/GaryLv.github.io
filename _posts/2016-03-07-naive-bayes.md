@@ -38,8 +38,7 @@ $$
 
 $$
 \begin{align*}
-    P(C_k|\mathbf{x}) &=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}
-    % &\propto P(\mathbf{x}|C_k)P(C_k)
+    P(C_k|\mathbf{x})&=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}
 \end{align*}
 $$
 
