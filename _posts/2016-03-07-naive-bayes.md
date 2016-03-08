@@ -62,6 +62,31 @@ $$
 \text{选择 }C_i \text{ 如果 } P(C_i|\mathbf{x})=\underset{k}{\max }\,P({C_k}|\mathbf{x})
 $$
 
+现在知道怎么来分类了，就差计算了，但是 $P(\mathbf{x}|C_k)$ 为联合概率密度函数，它可不好求，根据概率链式法则，它的计算过程如下：
+
+$$
+\begin{align*}
+    P(\mathbf{x}|C_k) &=P(x_1,x_2,\ldots,x_D|C_k) \\
+    &=P(x_1|x_2,\ldots,x_D,C_k)P(x_2|x_3,\ldots,x_D,C_k)\ldots P(x_{D-1}|x_D,C_k)P(x_D|C_k)
+\end{align*}
+$$
+
+这时我们要上大招了，那就是**朴素贝叶斯假设**。假设 $\mathbf{x}$ 中各属性之间条件独立，即
+
+$$
+\begin{align*}
+    P(x_1|x_2,\ldots,x_D,C_k)=P(x_1|C_k) \\
+    P(x_2|x_3,\ldots,x_D,C_k)=P(x_2|C_k)
+\end{align*}
+$$
+
+因此，似然值计算就简化为：
+
+$$
+    P(\mathbf{x}|C_k)\simeq P(x_1|C_k)P(x_2|,C_k)\ldots P(x_D|C_k)=\prod_{d=1}^{D}P(x_d|C_k)
+$$
+
+这样只需计算每个属性的条件概率就可以了。其实这是个很强的假设条件，现实中很难保证各变量之间能做到相互独立，也正是因为这个“要求”很高的条件，该方法前面被加上了朴素二字。
 
 ### Reference
 
