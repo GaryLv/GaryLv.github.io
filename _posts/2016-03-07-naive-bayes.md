@@ -37,9 +37,10 @@ $$
 现在我们考虑的是分类问题，设样本的特征向量 $\mathbf{x}=(x_1, x_2, \ldots, x_D)$，要将其分到类 $C_k$ 中，现重写贝叶斯公式如下：
 
 $$
-\begin{align*}
-    P(C_k|\mathbf{x})&=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}
-\end{align*}
+\begin{aligned}
+    P(C_k|\mathbf{x})&=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})} \\
+    &\propto P(\mathbf{x}|C_k)P(C_k)
+\end{aligned}
 $$
 
 其中，
