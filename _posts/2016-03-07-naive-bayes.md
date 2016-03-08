@@ -110,7 +110,24 @@ $$
 \end{align*}
 $$
 
+另外是否拖欠的先验概率为 $P(Y)=0.3$，$P(N)=0.7$。因此evidence都为 $P(\mathbf{x})$，不改变相对大小，因此可以忽略它，上公式计算后验概率得：
 
+$$
+\begin{align*}
+    P(N|\mathbf{x})=P(\mathbf{x}|N)\times P(N) &= P(有房=N|N)\times P(婚姻状况=已婚|N)\times P(年收入=120k|N) \times P(N) \\
+    &=4/7\times 4/7\times 0.0072 \times 7/10=0.0016
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    P(Y|\mathbf{x})=P(\mathbf{x}|Y)\times P(Y) &= P(有房=N|Y)\times P(婚姻状况=已婚|Y)\times P(年收入=120k|Y) \times P(Y) \\
+    &=1\times 0\times 1.2\times10^{-9} \times 3/10=0
+\end{align*}
+$$
+
+由于 $P(N|\mathbf{x})>P(Y|\mathbf{x})$，所以该样本应该被分到不拖欠类N。<br>
+不过这里出现了一个潜在的问题，如果一个属性的类条件概率等于0，则整个类的后验概率就等于0，这在样本少的时候很容易发生。
 
 ### Reference
 
