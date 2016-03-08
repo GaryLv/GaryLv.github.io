@@ -37,9 +37,9 @@ $$
 现在我们考虑的是分类问题，设样本的特征向量 $\mathbf{x}=(x_1, x_2, \ldots, x_D)$，要将其分到类 $C_k$ 中，现重写贝叶斯公式如下：
 
 $$
-\begin{aligned}
+
     P(A|B)=\dfrac{P(B|A)P(A)}{P(B)}
-\end{aligned}
+
 $$
 
 其中，
