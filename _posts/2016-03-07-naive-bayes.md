@@ -52,9 +52,7 @@ $$
 $$\mathbf{x}$$
 后，类的后验概率（posterior probability）
 * $P(C_k)$ 为类 $C_k$ 的先验概率（prior probability）
-
-*
-$$P(\mathbf{x}|C_{k})$$
+*  $$P(\mathbf{x}|C_{k})$$
 为给定类的似然值（class likelihood）
 * $P(\mathbf{x})$ 为证据（evidence）
 
