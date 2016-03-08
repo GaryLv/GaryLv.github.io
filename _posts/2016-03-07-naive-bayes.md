@@ -46,7 +46,6 @@ P(C_k|\mathbf{x}) &=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}\\
 $$
 
 其中，
-
 *  $$P(C_{k} | \mathbf{x})$$
 为给定观测
 $$\mathbf{x}$$
@@ -55,7 +54,6 @@ $$\mathbf{x}$$
 *  $$P(\mathbf{x}|C_{k})$$
 为给定类的似然值（class likelihood）
 * $P(\mathbf{x})$ 为证据（evidence）
-
 为将误差最小化，贝叶斯分类器选择具有最大后验概率的类，即
 
 $$
