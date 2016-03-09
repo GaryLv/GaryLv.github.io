@@ -63,4 +63,4 @@ Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit t
 
 ![pic](/img/post-sample-image.jpg)
 
-Intuitively, this result could have this useful interpretation. Both the random variables $X_2$ and $E(X_2|X_1)$ have the same mean $\mu_2$. If we did not know $\mu_2$, we could use either of the two random variables to guess at the unknown $\mu_2$. Since, however, $\text{Var}(X_2)\geq \text{Var}[E(X_2|X_1)]$, we could put more reliance in $E(X_2|X_1)$ as a guess.
+Intuitively, this result could have this useful interpretation. Both the random variables $X_2$ and $E(X_2\|X_1)$ have the same mean $\mu_2$. If we did not know $\mu_2$, we could use either of the two random variables to guess at the unknown $\mu_2$. Since, however, $\text{Var}(X_2)\geq \text{Var}[E(X_2|X_1)]$, we could put more reliance in $E(X_2|X_1)$ as a guess.
