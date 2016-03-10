@@ -46,6 +46,7 @@ P(C_k|\mathbf{x}) &=\dfrac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})}\\
 $$
 
 其中，
+
 * $P(C_{k} \vert \mathbf{x})$ 为给定观测 $\mathbf{x}$ 后，类 $C_k$ 的后验概率（posterior probability）
 * $P(C_k)$ 为类 $C_k$ 的先验概率（prior probability）
 * $P(\mathbf{x}\vert C_{k})$ 为给定类的似然值（class likelihood）
