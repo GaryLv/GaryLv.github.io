@@ -36,7 +36,7 @@ tags:
 
 决策树的学习过程，我们希望每次划分出的分支尽可能属于同一类别，即结点的“纯度”越来越高。考察下面以哪种属性作为分类条件更好呢？
 
-![](http://7xqutp.com1.z0.glb.clouddn.com/attri.png?imageView/2/w/500/q/100)
+![](http://7xqutp.com1.z0.glb.clouddn.com/attri.png?imageView/2/w/600/q/100)
 
 #### 信息增益
 信息熵（information entropy）是度量样本集合纯度最常用的一种指标，样本集合纯度越低（即系统越混乱），信息熵越高，反之则低。假定当前样本集合 $D$ 中第 $i$ 类样本所占的比例为 $p_i (i=1,2,\dots,n)$，则 $D$ 的信息熵定义为
@@ -47,6 +47,46 @@ $$
 
 编码样本集合 $i$ 需要分配的最少二进制位数为 $-\log_2p_i$，所以 $H(D)$ 描述了从 $D$ 中随机选取样本编码的位数的期望。数假设只分为两类(+,-)，熵的$1/2$ 随+类概率 $P_+$ 变化如下图，
 
-![](http://7xqutp.com1.z0.glb.clouddn.com/dt1.PNG?imageView/2/w/410/q/90)
+![](http://7xqutp.com1.z0.glb.clouddn.com/dt1.PNG?imageView/2/w/490/q/90)
 
-基尼系数后面会介绍，而分类误差率为 $1-\max(p_+,1-p_+)$，而且它总不会大于0.5，因为如果本来猜想的概率低，那么反着猜就好啦。
+基尼系数后面会介绍，而分类误差率为 $1-\max(p_+,1-p_+)$，而且它总不会大于0.5，因为如果本来猜想的概率低，那么反着猜就好啦。  
+我们回到上面的选分类属性的问题上来，既然信息熵表示样本集合的纯度，那么当以某一属性分类后，样本集合的整体信息熵减小的越多，说明分类效果越好。因此定义信息增益（information gain）
+
+$$
+\text{Gain}(D,a)=H(D)-\sum_{v=1}^{V}\dfrac{\vert D^v\vert}{\vert D\vert}H(D^v)
+$$
+
+其中离散属性值 $a$ 有 $V$ 个可能的取值 $\\{a^1,a^2,\dots,a^V\\}$, 因此划分为 $V$ 个分支结点，计算每个结点 $D^v$ 的信息熵，并赋予权重 $\vert D^v\vert /\vert D\vert$，即样本数越多的分支结点的影响力越大。
+
+于是，计算根结点的信息熵为
+
+$$
+    H(D)=-\sum_{i=1}^{n}p_i\log_2p_i=-\left(\frac{29}{64}\log_2 \frac{29}{64}+\frac{35}{64}\log_2\frac{35}{64}\right)=0.994
+$$
+
+计算信息熵代码如下
+
+```python
+    def entropy(class_probabilities):
+        """given a list of class probabilities, compute the entropy"""
+        return sum(-p * math.log(p, 2)
+                   for p in class_probabilities if p) # ignore zero probabilities
+```
+以属性 $a_i$ 分类后得到的2个分支结点的信息熵为
+
+$$
+\begin{aligned}
+        H(D^1)=-\left(\frac{21}{26}\log_2 \frac{21}{26}+\frac{5}{26}\log_2\frac{5}{26}\right)=0.706 \\
+        H(D^2)=-\left(\frac{8}{38}\log_2 \frac{8}{38}+\frac{30}{38}\log_2\frac{30}{38}\right)=0.742
+\end{aligned}
+$$
+
+计算属性 $a_i$ 的信息增益为
+
+$$
+\begin{aligned}
+        \text{Gain}(D,a_1)&=H(D)-\sum_{v=1}^{2}\dfrac{\vert D^v\vert}{\vert D\vert}H(D^v) \\
+        &=0.994-\left(\dfrac{26}{64}\times 0.706+ \dfrac{38}{64}\times 0.742 \right)\\
+        &=0.267
+\end{aligned}
+$$
