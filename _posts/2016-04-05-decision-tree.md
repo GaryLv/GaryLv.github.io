@@ -110,9 +110,24 @@ $$
 称为属性 $a$ 的固有值。属性 $a$ 的可能取值数目越多，则 $\text{IV}(a)$ 的值通常越大。需要注意的是，增益率准则对可取值数目较少的属性有所偏好，因此**C4.5**算法并不是直接选择增益率最大的候选划分属性，而是采用了一个启发式思想：先从候选划分属性中找出信息增益高于平均水平的属性，再选择增益率最高的。
 
 #### 基尼指数
-CART[^key]决策树使用基尼指数（Gini index）来选择划分属性
+CART[^key]决策树使用基尼指数（Gini index）来选择划分属性，数据集 $D$ 的纯度可用基尼值来度量：
 
-[^key]: Classification and Regression Tree
+$$
+    \text{Gini}(D)=\sum_{i=1}^{n}p_i(1-p_i)=1-\sum_{i=1}^{n}p_i^2
+$$
+
+直观来说，$\text{Gain}(D)$ 反映了从数据集 $D$ 中随机抽取两个样本不一致的概率。因此 $\text{Gain}(D)$ 越小，则数据集 $D$ 纯度越高。
+
+数据集以属性 $a$ 分类后对应的基尼指数定义为
+
+$$
+    \text{Gini}(D,a)=\sum_{v=1}^{n}\dfrac{\vert D^v\vert}{\vert D\vert}\text{Gini}(D^v)
+$$
+
+于是，选取基尼指数最小的属性作为划分属性。
+
+
+[^key]: Classification and Regression Tree 的缩写，可用于分类和回归
 
 ### Reference
 * Pang-Ning Tan, M. Steinbach, Vipin Kumar著, 范明, 范宏建等译.数据挖掘导论[M].人民邮电出版社.
