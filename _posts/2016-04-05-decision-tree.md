@@ -138,6 +138,7 @@ $$
 后剪枝技术倾向于产生更好的结果，后剪枝是根据完全增长的决策树做出的剪枝决策，先剪枝可能过早终止决策树的生长。然而对于后剪枝，当子树被剪掉以后，生长完全决策树额外的计算就被浪费掉了。
 
 ### 测试用例
+
 #### scikit-learn实现decision tree classification
 
 还是使用Iris数据集，通过如下代码即可构建出决策树来
@@ -164,7 +165,7 @@ array([0])
 >>> clf.predict_proba(iris.data[:1, :])
 array([[ 1.,  0.,  0.]])
 ```
-我们可以用`export_graphviz`方法把树状图导出[Graphviz](http://www.graphviz.org/Download.php)
+我们可以用`export_graphviz`方法把树状图导出[Graphviz](http://www.graphviz.org/Download.php)格式文件
 
 ```python
 with open("iris.dot", 'w') as f:
@@ -174,9 +175,11 @@ with open("iris.dot", 'w') as f:
                              filled=True, rounded=True,
                              special_characters=True)
 ```
-将生成的 `iris.dot` 文件导入`Graphviz`中，另存为`png`等图形格式即可，效果如下：
+将生成的 `iris.dot` 文件导入`Graphviz`（需安装）中，另存为`png`等图形格式即可，效果如下：
 ![iris](http://7xqutp.com1.z0.glb.clouddn.com/iris.png)
 
+选取Iris中每两对特征作为学习对象，其分类边界如下，代码参考[这里](http://scikit-learn.org/stable/auto_examples/tree/plot_iris.html#example-tree-plot-iris-py)
+![dt](http://7xqutp.com1.z0.glb.clouddn.com/dt.png)
 
 [^key]: Classification and Regression Tree 的缩写，可用于分类和回归
 
