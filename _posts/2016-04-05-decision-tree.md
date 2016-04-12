@@ -132,6 +132,7 @@ $$
   <dt>预剪枝</dt>
   <dd>在决策树生成过程中，对每个结点在划分前先进行估计，若当前结点的划分不能带来决策树泛化能力的提升，则停止划分并将当前结点标记为叶子结点。</dd>
 
+
   <dt>后剪枝</dt>
   <dd>先从训练集生成一棵完整的树，然后自底向上地对非叶子结点进行考察，若该结点对应的子树替换为叶子结点能带来泛化能力的提升，则将该子树替换为叶子结点。</dd>
 </dl>
@@ -187,3 +188,4 @@ with open("iris.dot", 'w') as f:
 * Pang-Ning Tan, M. Steinbach, Vipin Kumar著, 范明, 范宏建等译.数据挖掘导论[M].人民邮电出版社.
 * 周志华.机器学习[M].清华大学出版社.
 * M. Mitchell著, 曾华军, 张银奎等译. 机器学习[M]. 机械工业出版社.
+* [http://scikit-learn.org/stable/modules/tree.html](http://scikit-learn.org/stable/modules/tree.html)
