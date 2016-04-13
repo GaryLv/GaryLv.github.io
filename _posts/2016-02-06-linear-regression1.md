@@ -38,7 +38,7 @@ $$
 那么对于一组给定的训练集，我们如何选取参数 $\theta$ 呢？一种合理的想法是让 $h(x)$ 尽可能的接近于 $y$，这里我们定义**目标函数**：
 
 $$
-    J(\theta)=\frac{1}{2}\sum_{i=1}^{n} \left( h_\theta(x_i)-y_i \right) ^2
+    J(\theta)=\frac{1}{2n}\sum_{i=1}^{n} \left( h_\theta(x^{(i)})-y^{(i)} \right) ^2
 $$
 
 如果最小化 $J(\theta)$，我们可以得到对该数据集拟合程度最好的模型参数 $\theta$。
