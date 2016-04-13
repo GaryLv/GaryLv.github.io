@@ -114,23 +114,23 @@ $\qquad \qquad \\}$
 针对该问题，批量梯度下降法的公式可以直接表述为
 
 $$
-\theta_0  := \theta_0 - \alpha \dfrac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)}) \\
- \theta_1 := \theta_1 - \alpha \dfrac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}
+\theta_0  := \theta_0 - \alpha \dfrac{1}{n}\sum_{i=1}^{n}(h_\theta(x^{(i)})-y^{(i)}) \\
+ \theta_1 := \theta_1 - \alpha \dfrac{1}{n}\sum_{i=1}^{n}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_1
 $$
 
 每一步都会更新 $\theta_0$ 和 $\theta_1$使得目标函数一点点减少，代码如下
 
 ```python
     def gradientDescent(x, y, theta, alpha, num_iters):
-        m = len(y);
+        n = len(y);
         J_history = []
         for iters in range(num_iters):
             gradient = [0, 0]
-            for i in range(m):
+            for i in range(n):
                 gradient[0] += (theta[0] + theta[1]*x[i] - y[i])
                 gradient[1] += (theta[0] + theta[1]*x[i] - y[i]) * x[i]
-            theta[0] -= alpha/m*gradient[0]
-            theta[1] -= alpha/m*gradient[1]
+            theta[0] -= alpha/n*gradient[0]
+            theta[1] -= alpha/n*gradient[1]
             J_history.append(computeCost(x, y, theta))
         return [theta, J_history]    
 ```
