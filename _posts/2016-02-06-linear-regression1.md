@@ -73,7 +73,7 @@ $
 $
 
 $ \qquad \qquad \qquad
-\theta_j:=\theta_j+\alpha\sum_{i=1}^{n}(y^{(i)}-h(x^{(i)}))x_j^{(i)} \qquad(\text{for every }j)
+\theta_j:=\theta_j-\alpha\sum_{i=1}^{n}(h(x^{(i)})-y^{(i)})x_j^{(i)} \qquad(\text{for every }j)
 $
 
 $\qquad \qquad \\}$
@@ -84,7 +84,7 @@ $\qquad \qquad \text{Loop} \\{$
 
 $\qquad \qquad \qquad \text{for } i=1 \text{ to } m \\{ $
 
-$\qquad \qquad \qquad \qquad \theta_j:=\theta_j+\alpha(y^{(i)}-h(x^{(i)}))x_j^{(i)} \qquad(\text{for every }j) $
+$\qquad \qquad \qquad \qquad \theta_j:=\theta_j-\alpha(h(x^{(i)})-y^{(i)})x_j^{(i)} \qquad(\text{for every }j) $
 
 $\qquad \qquad \qquad  \\}$
 
