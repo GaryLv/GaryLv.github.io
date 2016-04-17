@@ -151,7 +151,9 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(iris.data, iris.target)
 ```
 
-虽然这里 `DecisionTreeClassifier()` 用的默认参数，还是有两个参数(`criterion` 和 `max_depth`) 需要介绍一下。`criterion` 即为衡量分类质量的标准，默认为 `criterion='gini'`，还有 `'entropy'` 来表征信息增益。 `max_depth` 为决策树的最大层数，默认为None。经过训练之后，模型可以用来预测样本，二分类输出标签为[-1,1]，多分类输出标签为[0,...,K-1]
+虽然这里 `DecisionTreeClassifier()` 用的默认参数，还是有两个参数(`criterion` 和 `max_depth`) 需要介绍一下。`criterion` 即为衡量分类质量的标准，默认为 `criterion='gini'`，还有 `'entropy'` 来表征信息增益。 `max_depth` 为决策树的最大层数，默认为None。
+
+经过训练之后，模型可以用来预测样本，二分类输出标签为[-1,1]，多分类输出标签为[0,...,K-1]
 
 ```python
 >>> clf.predict(iris.data[:1,:])
@@ -181,6 +183,8 @@ with open("iris.dot", 'w') as f:
 ![dt](http://7xqutp.com1.z0.glb.clouddn.com/dt.png)
 
 [^key]: Classification and Regression Tree 的缩写，可用于分类和回归
+
+## hello world
 
 ### Reference
 * Pang-Ning Tan, M. Steinbach, Vipin Kumar著, 范明, 范宏建等译.数据挖掘导论[M].人民邮电出版社.
