@@ -184,8 +184,6 @@ with open("iris.dot", 'w') as f:
 
 [^key]: Classification and Regression Tree 的缩写，可用于分类和回归
 
-## hello world
-
 ### Reference
 * Pang-Ning Tan, M. Steinbach, Vipin Kumar著, 范明, 范宏建等译.数据挖掘导论[M].人民邮电出版社.
 * 周志华.机器学习[M].清华大学出版社.
