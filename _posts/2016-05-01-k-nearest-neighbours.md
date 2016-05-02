@@ -88,8 +88,18 @@ print('A detailed classification report:\n' + report)
   virginica| 1.00  | 0.95  |  0.97 |  20
   avg / total| 0.98  | 0.98  | 0.98  |  60
 
+可以看出预测结果还不错，下面我们将结果分类结果可视化出来。为作图显示方便只选取`iris dataset`的前两个属性，分类边界如下
+
+![knn](http://7xqutp.com1.z0.glb.clouddn.com/knn.png)
+
+### 总结
+* kNN是一种lazy learning方法，它不去构建一个通用的模型，而是简单的把训练数据存储起来。因为没有假设函数形式，它也被称作非参数方法
+* k的选取很多程度依赖于数据集，通常来讲更大的k可以抑制噪声，但会使得边界不是很明显
+* 计算复杂度高，空间复杂度高
+
 ### Reference
 
 * [https://blog.cambridgecoding.com/2016/01/16/machine-learning-under-the-hood-writing-your-own-k-nearest-neighbour-algorithm/](https://blog.cambridgecoding.com/2016/01/16/machine-learning-under-the-hood-writing-your-own-k-nearest-neighbour-algorithm/)
 * [http://machinelearningmastery.com/tutorial-to-implement-k-nearest-neighbors-in-python-from-scratch/](http://machinelearningmastery.com/tutorial-to-implement-k-nearest-neighbors-in-python-from-scratch/)
+* [http://scikit-learn.org/stable/modules/neighbors.html](http://scikit-learn.org/stable/modules/neighbors.html)
 * P. Harrington著, 李锐, 李鹏等译. 机器学习实战[M]. 人们邮电出版社.
