@@ -81,7 +81,7 @@ print('A detailed classification report:\n' + report)
 
     The overall accuracy of the model is: 0.983333333333
 
-   | precision  | recall  | f1-score  |  support
+  label | precision  | recall  | f1-score  |  support
 --:|---:|---:|---:|--:
  setosa | 1.00  | 1.00  |  1.00 |  19
   versicolor| 0.95  | 1.00  |  0.98 |  21
