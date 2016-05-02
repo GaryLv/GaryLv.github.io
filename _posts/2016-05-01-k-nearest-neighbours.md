@@ -12,7 +12,7 @@ tags:
 ### 简介
 k-近邻算法思路简单清晰，同时拥有不错的分类效果，处理大规模的数据分类，尤其适用于样本分类边界不规则的情况，对异常值不敏感，无需数据输入假定等优点，被列入[十大数据挖掘算法](http://www.cs.uvm.edu/~icdm/algorithms/10Algorithms-08.pdf)之一。
 
-kNN思路如下，拿到一组数据，计算它跟样本集中每组数据的相似性，找出前k组最相似的数据，看这k组数据中哪个类别出现的最多，哪个就是新数据的分类。相似性就可以用各种距离来定义，这里我们采用欧氏距离。下面盗个图来说明kNN算算法流程。
+kNN思路如下，拿到一组数据，计算它跟样本集中每组数据的相似性，找出前k组最相似的数据，看这k组数据中哪个类别出现的最多，哪个就是新数据的分类。相似性就可以用各种距离来定义，这里我们采用欧氏距离。怎么样，是不爆简单，下面盗个图来说明kNN算算法流程。
 ![](https://cambridgecoding.files.wordpress.com/2016/01/knn2.jpg)
 
 ### 实现
@@ -22,7 +22,7 @@ kNN算法步骤总结如下：
 2. 按距离递增的顺序排序，找出前k个点作为最近邻居集
 3. 在最近邻居集合中选出出现频次最高的类别作为当前点的预测分类
 
-python实现kNN算法根据上述步骤如下：
+根据上述步骤用python实现kNN算法如下：
 
 #### 1. 计算欧式距离
 ```python
@@ -88,7 +88,7 @@ print('A detailed classification report:\n' + report)
   virginica| 1.00  | 0.95  |  0.97 |  20
   avg / total| 0.98  | 0.98  | 0.98  |  60
 
-可以看出预测结果还不错，下面我们将结果分类结果可视化出来。为作图显示方便只选取`iris dataset`的前两个属性，分类边界如下
+可以看出预测结果还不错，下面我们将结果分类结果可视化出来。为作图显示方便只选取`iris dataset`的前两个属性，代码在[这里](https://github.com/GaryLv/GaryLv.github.io/blob/master/codes/k-nearest%20neighbours/knn1.py)查看，其分类边界如下
 
 ![knn](http://7xqutp.com1.z0.glb.clouddn.com/knn.png)
 
