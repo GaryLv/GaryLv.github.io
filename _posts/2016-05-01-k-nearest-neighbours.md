@@ -17,6 +17,7 @@ kNN思路如下，拿到一组数据，计算它跟样本集中每组数据的�
 
 ### 实现
 kNN算法步骤总结如下：
+
 1. 计算当前点与已知类别数据集中的点的距离
 2. 按距离递增的顺序排序，找出前k个点作为最近邻居集
 3. 在最近邻居集合中选出出现频次最高的类别作为当前点的预测分类
@@ -59,6 +60,7 @@ def get_majority(neighbours):
     count = Counter(neighbours)
     return count.most_common()[0][0]
 ```
+
 #### 4. 测试算法
 ```python
 from sklearn.metrics import classification_report, accuracy_score
@@ -78,8 +80,8 @@ print('A detailed classification report:\n' + report)
 结果如下
 
     The overall accuracy of the model is: 0.983333333333
-    
-  | precision  | recall  | f1-score  |  support
+
+   | precision  | recall  | f1-score  |  support
 --:|---:|---:|---:|--:
  setosa | 1.00  | 1.00  |  1.00 |  19
   versicolor| 0.95  | 1.00  |  0.98 |  21
