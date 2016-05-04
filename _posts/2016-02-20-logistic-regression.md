@@ -198,7 +198,7 @@ def logistic_regression(data, label, alpha = 0.01, lamda = 0.001):
     return w
 ```
 
-计算出参数后，根据 $h_\theta(x)=g(\theta^Tx)=0$ ，就可做出分界面来，其中 $g(\cdot)$ 为sigmoid函数，结果可视化如下
+计算出参数后，根据 $h_\theta(x)=g(\theta^Tx)=0.5$ ，即 $\theta^Tx=0$ ,就可做出分界面来，其中 $g(\cdot)$ 为sigmoid函数，结果可视化如下
 ![nb](http://7xqutp.com1.z0.glb.clouddn.com/non2.png?imageView/2/w/500/q/90)
 
 分类结果还是不错的，这个正则化项要是小的话，结果就是边界曲线很弯曲，普适性差；正则化项大了的话就是精度低，会有好多错误的分类结果。
