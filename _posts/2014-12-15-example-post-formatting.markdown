@@ -56,6 +56,12 @@ Nullam quis risus eget urna mollis ornare vel eu leo. Cras mattis consectetur pu
 
 <u>Donec id elit non mi porta gravida at eget metus.</u> Cum sociis natoque penatibus et magnis dis parturient montes, *nascetur ridiculus mus*. Maecenas faucibus mollis interdum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 
+\[
+\begin{equation}
+        \mathbf{x}=\mathbf{x^{(i)}}-r^{(i)}\dfrac{\mathbf{w}}{||\mathbf{w}||}
+\end{equation}
+\]
+
 Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
 
     Hello World!
