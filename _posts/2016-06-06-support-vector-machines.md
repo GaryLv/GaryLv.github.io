@@ -17,7 +17,7 @@ tags:
 
 #### 超平面与间隔
 
-首先我们选取一个相对简单的情况--线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\}, y_i\in\\{-1,+1\\}$ 如图1所示
+首先我们选取一个相对简单的情况 一 线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\},  y_i\in\\{-1,+1\\}$ 如图1所示
 
 ![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png "图1 间隔与超平面示意图")
 
@@ -53,13 +53,13 @@ $$
 \gamma=\dfrac{y(\mathbf{w}^T\mathbf{x}+b)}{||\mathbf{w}||}\geq \rho
 $$
 
-并期望最大化 $\rho$。但同时缩放 $\mathbf{w}$ 和 $b$ 会得到无限多个解。为了能够得到唯一的解，这里限定 $\rho\vert\vert w\vert\vert=1$，这样为了最大化间隔，就可以最小化 $\vert\vert w\vert\vert$，同时为了数学计算方便，即最小化 $1/2\vert\vert w\vert\vert^2$。于是我们得到了支持向量机的基本型
+并期望最大化 $\rho$。但同时缩放 $\mathbf{w}$ 和 $b$ 会得到无限多个解。为了能够得到唯一的解，这里限定 $\rho\vert\vert \mathbf{w}\vert\vert=1$，这样为了最大化间隔，就可以最小化 $\vert\vert \mathbf{w}\vert\vert$，同时为了数学计算方便，即最小化 $1/2\vert\vert \mathbf{w}\vert\vert^2$。于是我们得到了支持向量机的基本型
 
 $$
 \begin{aligned}
-&\min_{\mathbf{w},b} \quad\dfrac{1}{2}||w||^2 \\
+&\min_{\mathbf{w},b} \quad\dfrac{1}{2}||\mathbf{w}||^2 \\
 &s.t. \quad y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)}+b)\geq 1, \qquad i=1,2,\dots,n.
 \end{aligned}
 $$
 
-其中使得限制条件等式成立的点被称为支撑向量（support vector），支撑向量到超平面的距离为 $1/\vert\vert w\vert\vert$，因此几何间隔为 $2/\vert\vert w\vert\vert$。
+其中使得限制条件等式成立的点被称为支撑向量（support vector），支撑向量到超平面的距离为 $1/\vert\vert \mathbf{w}\vert\vert$，因此几何间隔为 $2/\vert\vert \mathbf{w}\vert\vert$。
