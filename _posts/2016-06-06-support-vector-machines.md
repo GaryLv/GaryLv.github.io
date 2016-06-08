@@ -15,9 +15,9 @@ tags:
 
 ### Hard-margin
 
-#### 超平面与间隔
+#### Hyper-plane and Margin
 
-首先我们选取一个相对简单的情况 一 线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\},  y_i\in\\{-1,+1\\}$ 如图1所示
+首先我们选取一个相对简单的情况 一 线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\},\quad  y_i\in\\{-1,+1\\}$ 如图1所示
 
 ![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png "图1 间隔与超平面示意图")
 
@@ -63,3 +63,35 @@ $$
 $$
 
 其中使得限制条件等式成立的点被称为支撑向量（support vector），支撑向量到超平面的距离为 $1/\vert\vert \mathbf{w}\vert\vert$，因此几何间隔为 $2/\vert\vert \mathbf{w}\vert\vert$。
+
+#### Dual Problem
+
+上面的基本型是凸二次规划问题，已经可以直接用最优化方法求解，但是我们可以通过拉格朗日对偶来更有效的解决该问题。根据本科所学的工科数学分析中条件极值[拉格朗日乘数法](https://en.wikipedia.org/wiki/Lagrange_multiplier)的知识可知，定义拉格朗日函数为
+
+$$
+\mathcal{L}(\mathbf{w},b,\mathbf{\alpha}) = \dfrac{1}{2}||\mathbf{w}||^2+\sum_{i=1}^{n}\alpha_i(1-y_i(\mathbf{w}^T\mathbf{x}_i+b))
+$$
+
+该非约束问题为求解 $\min_{\mathbf{w,b}}\max_{\mathbf{\alpha}:\mathbf{\alpha}\geq0}\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})$  。令 $\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})$ 对 $\mathbf{w}$ 和 $b$ 的偏导为零可得
+
+$$
+\begin{aligned}
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=0}^{n}\alpha_iy_i\mathbf{x}_i \\
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad 0=\sum_{i=0}^{n}\alpha_iy_i
+\end{aligned}
+$$
+
+将它们带入 $\mathcal{L}(\mathbf{w},b,\mathbf{\alpha})$ 即可消去 $\mathbf{w}$ 和 $b$，得到对偶问题为
+
+$$
+\begin{aligned}
+\max_{\mathbf{\alpha}} \sum_{i=1}^{n}\alpha_i-\dfrac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\alpha_i\alpha_jy_iy_j\mathbf{x}_i^T\mathbf{x}_j \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+s.t. \quad &\sum_{i=0}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\\
+&\alpha_i\geq0,\qquad i=1,2,\dots,n.
+\end{aligned}
+$$
