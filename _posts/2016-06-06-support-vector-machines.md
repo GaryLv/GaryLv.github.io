@@ -76,8 +76,8 @@ $$
 
 $$
 \begin{aligned}
-&\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=0}^{n}\alpha_iy_i\mathbf{x}_i \\
-&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad 0=\sum_{i=0}^{n}\alpha_iy_i
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i \\
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad 0=\sum_{i=1}^{n}\alpha_iy_i
 \end{aligned}
 $$
 
@@ -91,7 +91,7 @@ $$
 
 $$
 \begin{aligned}
-s.t. \quad &\sum_{i=0}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\\
+s.t. \quad &\sum_{i=1}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\\
 &\alpha_i\geq0,\qquad i=1,2,\dots,n.
 \end{aligned}
 $$
@@ -102,4 +102,4 @@ $$
 d^*=\max_{\alpha:\alpha\geq=0}\min_{\mathbf{w},b}\mathcal{L}(\mathbf{w},b,\mathbf{\alpha}) \le \min_{\mathbf{w},b}\max_{\mathbf{\alpha}:\mathbf{\alpha}\geq0}\mathcal{L}(\mathbf{w},b,\mathbf{\alpha}) = p^*
 $$
 
-其中 $p^*$ 和 $d^*$ 分别为原问题（primal problem）和对偶问题（dual problem）的解，这里的特殊条件下，二者相等。
+其中 $p^* \text{和 } d^*$ 分别为原问题（primal problem）和对偶问题（dual problem）的解，这里的特殊条件下，二者相等。
