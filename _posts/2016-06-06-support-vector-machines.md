@@ -127,7 +127,7 @@ $$
 \max_{\alpha}\alpha^Te-\dfrac{1}{2}\alpha^TS\alpha
 $$
 
-其中 $e$ 为单位向量， $S=(y_i\mathbf{x}_i^T)(y_j\mathbf{x}_j)$，可以看出这是个二次规划问题，但该问题的规模依赖于样本大小，所以在实际任务中会造成很大开销。为了避开这个障碍，根据问题本身的特性提出了SMO算法。<p>SMO算法主要思路是固定其他参数，每次只通过一个参数求出其极值，以此类推，于是我们就得出了 $\alpha$，进而得到 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$，带入到约束条件中，对所有支撑向量 $(\mathbf{x}_s,y_s)$ 都满足
+其中 $e$ 为单位向量 $S=(y_i\mathbf{x}_i^T)(y_j\mathbf{x}_j)$，可以看出这是个二次规划问题，但该问题的规模依赖于样本大小，所以在实际任务中会造成很大开销。为了避开这个障碍，根据问题本身的特性提出了SMO算法。<p>SMO算法主要思路是固定其他参数，每次只通过一个参数求出其极值，以此类推，于是我们就得出了 $\alpha$，进而得到 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$，带入到约束条件中，对所有支撑向量 $(\mathbf{x}_s,y_s)$ 都满足
 
 $$
 y_s(\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\mathbf{x}_s+b)=1
