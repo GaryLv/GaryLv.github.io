@@ -120,3 +120,29 @@ $$
 * 若 $\alpha_i>0$ ，则 $y_i(\mathbf{w}^T\mathbf{x}_i+b)=1$ ，其对应的样本点位于最大间隔边界上，即支撑向量。
 
 这样体现了支撑向量的作用，分割平面的确定只与支撑向量有关。
+
+上面说了一堆性质，对SVM有了一定的认识，可是还是不知道怎么解啊，下面就简单了解下如何求解该对偶问题的过程。对偶问题可以表述成如下的形式
+
+$$
+\max_{\alpha}\alpha^Te-\dfrac{1}{2}\alpha^TS\alpha
+$$
+
+其中 $e$ 为单位向量， $S=(y_i\mathbf{x}_i^T)(y_j\mathbf{x}_j)$，可以看出这是个二次规划问题，但该问题的规模依赖于样本大小，所以在实际任务中会造成很大开销。为了避开这个障碍，根据问题本身的特性提出了SMO算法。SMO算法主要思路是固定其他参数，每次只通过一个参数求出其极值，以此类推，于是我们就得出了 $\alpha$，进而得到 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$，带入到约束条件中，对所有支撑向量 $(\mathbf{x}_s,y_s)$ 都满足
+
+$$
+y_s(\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\mathbf{x}_s+b)=1
+$$
+
+其中 $S$ 为支撑向量集合，两边同时乘以 $y_s$ 得
+
+$$
+\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\mathbf{x}_s+b=y_s
+$$
+
+对任意一个支撑向量就可以求出一个 $b$ 来，为了数值稳定起见，我们通过所有支撑向量求出 $b$ 值，然后取平均。
+
+$$
+b=\dfrac{1}{|S|}\sum_{s\in S}\left(y_s-\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\mathbf{x}_s\right)
+$$
+
+### Kernel Function
