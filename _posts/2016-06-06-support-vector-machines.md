@@ -103,3 +103,15 @@ d^*=\max_{\alpha:\alpha\geq=0}\min_{\mathbf{w},b}\mathcal{L}(\mathbf{w},b,\mathb
 $$
 
 其中 $p^* \text{和 } d^*$ 分别为原问题（primal problem）和对偶问题（dual problem）的解，这里的特殊条件下，二者相等。
+
+注意到SVM基本型的不等式约束，因此上述过程满足KKT条件，即
+
+$$
+\begin{cases}
+		\alpha_i\geq 0  \\
+		1-y_i(\mathbf{w}^T\mathbf{x}_i+b)\le 0  \\
+		\alpha_i(1-y_i(\mathbf{w}^T\mathbf{x}_i+b)) =0
+\end{cases}
+$$
+
+可以看出，为满足KKT条件，要么 $\alpha_i=0$，要么 $1-y_i(\mathbf{w}^T\mathbf{x}_i+b)=0$。若 $\alpha_i=0$，则在求解 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$ 中不会起任何作用；若 $\alpha_i>0$，则 $y_i(\mathbf{w}^T\mathbf{x}_i+b)=1$，其对应的样本点位于最大间隔边界上，即支撑向量。这样体现支撑向量的作用，分割平面的确定只与支撑向量有关。
