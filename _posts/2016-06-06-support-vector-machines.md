@@ -114,4 +114,4 @@ $$
 \end{cases}
 $$
 
-可以看出，为满足KKT条件，要么 $\alpha_i=0$，要么 $1-y_i(\mathbf{w}^T\mathbf{x}_i+b)=0$。若 $\alpha_i=0$，则在求解 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$ 中不会起任何作用；若 $\alpha_i>0$，则 $y_i(\mathbf{w}^T\mathbf{x}_i+b)=1$，其对应的样本点位于最大间隔边界上，即支撑向量。这样体现支撑向量的作用，分割平面的确定只与支撑向量有关。
+可以看出，为满足KKT条件，要么 $\alpha_i=0$ ，要么 $1-y_i(\mathbf{w}^T\mathbf{x}_i+b)=0$ 。若 $\alpha_i=0$ ，则在求解 $\mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i$ 中不会起任何作用；若   $\alpha_i>0$ ，则 $y_i(\mathbf{w}^T\mathbf{x}_i+b)=1$ ，其对应的样本点位于最大间隔边界上，即支撑向量。这样体现支撑向量的作用，分割平面的确定只与支撑向量有关。
