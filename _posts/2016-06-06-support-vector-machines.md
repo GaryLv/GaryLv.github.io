@@ -157,6 +157,6 @@ $$
 
 假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $[x_1, x_2]^T$ 映射到 $[x_1, x_2, r]^T$ 上去，效果如下所示
 
-![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/450/q/90)
+![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/500/q/100)
 
-显然在新的空间里线性可分，幸运的是，如果原始空间是有限维的，即属性有限，那么一定存在一个高维特征空间使样本可分。
+显然在新的空间里线性可分，代码在[这里](https://github.com/GaryLv/GaryLv.github.io/blob/master/codes/Support%20Vector%20Machines/MappingDemo.py)。幸运的是，如果原始空间是有限维的，即属性有限，那么一定存在一个高维特征空间使样本可分。
