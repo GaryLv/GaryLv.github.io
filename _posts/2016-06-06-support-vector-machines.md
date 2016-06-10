@@ -109,7 +109,7 @@ $$
 $$
 \begin{cases}
 		\alpha_i\geq 0  \\
-		1-y_i(\mathbf{w}^T\mathbf{x}_i+b)\le 0  \\
+		y_i(\mathbf{w}^T\mathbf{x}_i+b)-1\geq 0  \\
 		\alpha_i(1-y_i(\mathbf{w}^T\mathbf{x}_i+b)) =0
 \end{cases}
 $$
@@ -121,7 +121,7 @@ $$
 
 这样体现了支撑向量的作用，分割平面的确定只与支撑向量有关。
 
-![](http://7xqutp.com1.z0.glb.clouddn.com/svm_demo1.png)
+![](http://7xqutp.com1.z0.glb.clouddn.com/svm_demo1.png?imageView/2/w/450/q/90)
 
 上面说了一堆性质，对SVM有了一定的认识，可是还是不知道怎么解啊，下面就简单了解下如何求解该对偶问题的过程。对偶问题可以表述成如下的形式
 
@@ -150,3 +150,13 @@ b=\dfrac{1}{|S|}\sum_{s\in S}\left(y_s-\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\ma
 $$
 
 ### Kernel Function
+
+上面是关于线性可分的，如果像下面的这种非线性情况就需要将样本映射到高维空间去，然后在新空间使用线性模型。
+
+![Nonlinear](http://7xqutp.com1.z0.glb.clouddn.com/kernel0.png?imageView/2/w/450/q/90)
+
+假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $[x_1, x_2]^T$ 映射到 $[x_1, x_2, r]^T$ 上去，效果如下所示
+
+![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/450/q/90)
+
+显然在新的空间里线性可分，幸运的是，如果原始空间是有限维的，即属性有限，那么一定存在一个高维特征空间使样本可分。
