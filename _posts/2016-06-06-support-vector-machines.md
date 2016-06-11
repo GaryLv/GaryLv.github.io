@@ -253,7 +253,7 @@ $$
 
 $$
 \begin{aligned}
-K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \qquad \qquad \qquad \qquad \qquad \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
+&K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \sigma\text{为高斯核}&\text{的带宽，使用更大的带宽，会得到更光滑的边界}
 \end{aligned}
 $$
 
