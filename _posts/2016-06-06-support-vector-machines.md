@@ -157,7 +157,7 @@ $$
 
 ![Nonlinear](http://7xqutp.com1.z0.glb.clouddn.com/kernel0.png?imageView/2/w/450/q/90)
 
-假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $\mathbf{x}=[x_1, x_2]^T$ 映射到 $\phi(\mathbf{x})=[x_1, x_2, r]^T$ 上去， $\phi$ 代表了 feature mapping， 效果如下所示
+假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $\mathbf{x}=[x_1, x_2]^T$ 映射到 $\phi(\mathbf{x})=[x_1, x_2, r]^T$ 上去， $\phi$ 代表了 **feature mapping**， 效果如下所示
 
 ![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/500/q/100)
 
@@ -253,7 +253,7 @@ $$
 
 $$
 \begin{aligned}
-K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \qquad \qquad \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
+K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \qquad \qquad \qquad \qquad \qquad \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
 \end{aligned}
 $$
 
