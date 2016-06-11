@@ -25,26 +25,26 @@ tags:
 
 $$ \mathbf{w}^T\mathbf{x}+b=0$$
 
-要最大化间隔，就需要先把间隔表示出来。设正样本任意点 $(\mathbf{x}^{(i)}, y^{(i)})$ 到超平面的距离为 $\gamma ^{(i)}$，则该点在超平面的投影点的坐标为
+要最大化间隔，就需要先把间隔表示出来。设正样本任意点 $(\mathbf{x}_i, y_i)$ 到超平面的距离为 $\gamma_i$，则该点在超平面的投影点的坐标为
 
-$$\mathbf{x}=\mathbf{x}^{(i)}-\gamma ^{(i)}\dfrac{\mathbf{w}}{||\mathbf{w}||}$$
+$$\mathbf{x}=\mathbf{x}_i-\gamma_i\dfrac{\mathbf{w}}{||\mathbf{w}||}$$
 
-将其带入超平面方程中，求解 $r^{(i)}$ 得
+将其带入超平面方程中，求解 $\gamma_i$ 得
 
 $$
-\gamma ^{(i)}=\dfrac{\mathbf{w}^T\mathbf{x}^{(i)}+b}{||\mathbf{w}||}
+\gamma_i=\dfrac{\mathbf{w}^T\mathbf{x}_i+b}{||\mathbf{w}||}
 $$
 
 上面是针对正样本的，更一般的样本点到超平面的距离为
 
 $$
-\gamma ^{(i)}=\dfrac{y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)}+b)}{||\mathbf{w}||}
+\gamma _i=\dfrac{y_i(\mathbf{w}^T\mathbf{x}_i+b)}{||\mathbf{w}||}
 $$
 
 实际有效用的里超平面最近的点，是它卡住了超平面的位置，所以设全局几何间隔
 
 $$
-\gamma =\min_{i=1,2,\dots,n}\gamma^{(i)}
+\gamma =\min_{i=1,2,\dots,n}\gamma_i
 $$
 
 我们希望至少对某个 $\rho$ 满足
@@ -58,7 +58,7 @@ $$
 $$
 \begin{aligned}
 &\min_{\mathbf{w},b} \quad\dfrac{1}{2}||\mathbf{w}||^2 \\
-&s.t. \quad y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)}+b)\geq 1, \qquad i=1,2,\dots,n.
+&s.t. \quad y_i(\mathbf{w}^T\mathbf{x}_i+b)\geq 1, \qquad i=1,2,\dots,n.
 \end{aligned}
 $$
 
@@ -149,14 +149,48 @@ $$
 b=\dfrac{1}{|S|}\sum_{s\in S}\left(y_s-\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\mathbf{x}_s\right)
 $$
 
-### Kernel Function
+### Kernel
+#### Feature Mapping
 
 上面是关于线性可分的，如果像下面的这种非线性情况就需要将样本映射到高维空间去，然后在新空间使用线性模型。
 
 ![Nonlinear](http://7xqutp.com1.z0.glb.clouddn.com/kernel0.png?imageView/2/w/450/q/90)
 
-假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $[x_1, x_2]^T$ 映射到 $[x_1, x_2, r]^T$ 上去，效果如下所示
+假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $\mathbf{x}=[x_1, x_2]^T$ 映射到 $\phi(\mathbf{x})=[x_1, x_2, r]^T$ 上去， $\phi$ 代表了 feature mapping， 效果如下所示
 
 ![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/500/q/100)
 
 显然在新的空间里线性可分，代码在[这里](https://github.com/GaryLv/GaryLv.github.io/blob/master/codes/Support%20Vector%20Machines/MappingDemo.py)。幸运的是，如果原始空间是有限维的，即属性有限，那么一定存在一个高维特征空间使样本可分。
+
+有了 $\phi$ 以后，在特征空间的划分超平面变为为
+
+$$
+\mathbf{w}^T\phi(\mathbf{x})+b=0
+$$
+
+类似的，可以得到目标函数
+
+$$
+\begin{aligned}
+&\min_{\mathbf{w},b} \quad\dfrac{1}{2}||\mathbf{w}||^2 \\
+&s.t. \quad y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)\geq 1, \qquad i=1,2,\dots,n.
+\end{aligned}
+$$
+
+其对偶问题为
+
+$$
+\begin{aligned}
+\max_{\mathbf{\alpha}} \sum_{i=1}^{n}\alpha_i-\dfrac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\alpha_i\alpha_jy_iy_j\phi(\mathbf{x})_i^T\phi(\mathbf{x}_j) \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+s.t. \quad &\sum_{i=1}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\qquad\quad\\
+&\alpha_i\geq0,\qquad i=1,2,\dots,n.
+\end{aligned}
+$$
+
+#### Kernel Trick
+由上可见核方法的强力功效，但稍一想想，感觉起码会有两个问题，一是面对一个新的问题，我怎么知道选取什么样的映射；二是我一顿把样本往高维映射，有可能就出现“维数灾难”。对第一个问题我们后面介绍几种常见的核函数，这里先讨论下第二个问题。
