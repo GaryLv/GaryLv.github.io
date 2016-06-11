@@ -238,3 +238,29 @@ $$
 在此例中，只需将二者点乘后加 $c$ 求平方即可，而无需先做映射再求点积。所以我们也可以不用知道 $\phi(\cdot)$ 的具体形式。
 
 #### Kernel Function
+
+我们来看看什么样的函数才能成为核函数，如果 $K$ 是个有效核，那么其对应的核矩阵 $K\in\mathbb{R}^{n\times n}$ 是对称半正定矩阵，满足Mercer Theorem。
+
+之后就是如何选取核函数的问题，由一些基本经验，对文本数据通常采用线性核，情况不明时可先尝试高斯核。核也通常被看作相似性度量，当 $\mathbf{X}$ 和 $\mathbf{Z}$ 更“相似”时， $K(\mathbf{X},\mathbf{Z})$ 取更大的值。下面列举一些常用的核函数
+
+* $d$ 次多项式核
+
+$$
+K(\mathbf{X}, \mathbf{Z})=(\mathbf{X}^T\mathbf{Z}+1)^d
+$$
+
+* 高斯/径向基核
+
+$$
+\begin{aligned}
+K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
+\end{aligned}
+$$
+
+* Sigmoid 核
+
+$$
+K(\mathbf{X}, \mathbf{Z})=\tanh(\beta \mathbf{X}^T\mathbf{Z}+\theta)
+$$
+
+### Soft-margin
