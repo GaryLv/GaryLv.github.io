@@ -243,21 +243,21 @@ $$
 
 之后就是如何选取核函数的问题，由一些基本经验，对文本数据通常采用线性核，情况不明时可先尝试高斯核。核也通常被看作相似性度量，当 $\mathbf{X}$ 和 $\mathbf{Z}$ 更“相似”时， $K(\mathbf{X},\mathbf{Z})$ 取更大的值。下面列举一些常用的核函数
 
-* $d$ 次多项式核
+* **$d$ 次多项式核**
 
 $$
 K(\mathbf{X}, \mathbf{Z})=(\mathbf{X}^T\mathbf{Z}+1)^d
 $$
 
-* 高斯/径向基核
+* **高斯/径向基核**
 
 $$
 \begin{aligned}
-K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
+K(\mathbf{X}, \mathbf{Z})=\exp\left(-\dfrac{||\mathbf{X}-\mathbf{Z}||^2}{2\sigma^2}\right) \\ \qquad \qquad \sigma\text{为高斯核的带宽，使用更大的带宽，会得到更光滑的边界}
 \end{aligned}
 $$
 
-* Sigmoid 核
+* **Sigmoid 核**
 
 $$
 K(\mathbf{X}, \mathbf{Z})=\tanh(\beta \mathbf{X}^T\mathbf{Z}+\theta)
