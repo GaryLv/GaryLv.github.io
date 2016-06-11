@@ -19,7 +19,7 @@ tags:
 
 首先我们选取一个相对简单的情况 一 线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\},\quad  y_i\in\\{-1,+1\\}$ 如图1所示
 
-![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png "图1 间隔与超平面示意图")
+![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png?imageView/2/w/550/q/100)
 
 我们要做的就是找到那么一个超平面，使得离不同类别的样本最远，因为这样该分类器的鲁棒性最好，即使数据有噪声也不会轻易跑到另一类中去。设划分超平面方程为
 
@@ -150,6 +150,7 @@ b=\dfrac{1}{|S|}\sum_{s\in S}\left(y_s-\sum_{i\in S}\alpha_iy_i\mathbf{x}_i^T\ma
 $$
 
 ### Kernel
+
 #### Feature Mapping
 
 上面是关于线性可分的，如果像下面的这种非线性情况就需要将样本映射到高维空间去，然后在新空间使用线性模型。
@@ -192,5 +193,7 @@ s.t. \quad &\sum_{i=1}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\qquad\quad\\
 \end{aligned}
 $$
 
+因此求解过程只是变成了涉及计算 $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$，即样本 $\mathbf{x}_i$ 与 $\mathbf{x}_j$ 映射到特征空间的内积。
+
 #### Kernel Trick
-由上可见核方法的强力功效，但稍一想想，感觉起码会有两个问题，一是面对一个新的问题，我怎么知道选取什么样的映射；二是我一顿把样本往高维映射，有可能就出现“维数灾难”。对第一个问题我们后面介绍几种常见的核函数，这里先讨论下第二个问题。
+由上可见mapping思想的强力功效，但稍一想想，感觉起码会有两个问题，一是面对一个新的问题，我怎么知道选取什么样的映射；二是我一顿把样本往高维映射，高维度会造成计算困难。对第一个问题我们后面介绍几种常见的核函数，这里先讨论下第二个问题。
