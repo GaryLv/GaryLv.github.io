@@ -157,7 +157,7 @@ $$
 
 ![Nonlinear](http://7xqutp.com1.z0.glb.clouddn.com/kernel0.png?imageView/2/w/450/q/90)
 
-假如我们选用一个radial basis function --- $r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $\mathbf{x}=[x_1, x_2]^T$ 映射到 $\phi(\mathbf{x})=[x_1, x_2, r]^T$ 上去， $\phi$ 代表了 **feature mapping**， 效果如下所示
+假如我们选用一个radial basis function $\longrightarrow r=\exp(-(x_1^2+x_2^2))$，则样本从空间 $\mathbf{x}=[x_1, x_2]^T$ 映射到 $\phi(\mathbf{x})=[x_1, x_2, r]^T$ 上去， $\phi$ 代表了 **feature mapping**， 效果如下所示
 
 ![map](http://7xqutp.com1.z0.glb.clouddn.com/kernel1.png?imageView/2/w/500/q/100)
 
@@ -264,3 +264,37 @@ K(\mathbf{X}, \mathbf{Z})=\tanh(\beta \mathbf{X}^T\mathbf{Z}+\theta)
 $$
 
 ### Soft-margin
+
+那对不可分的数据，我们在基本型中通过引入*松弛变量* （slack variable） $\xi\geq 0$ 对限制条件进行一定的放宽，现在目标函数变为：
+
+$$
+\begin{aligned}
+&\min_{\mathbf{w},b} \quad\dfrac{1}{2}||\mathbf{w}||^2 + C\sum_i\xi_i\\
+&s.t. \quad y_i(\mathbf{w}^T\mathbf{x}_i+b)\geq 1-\xi_i, \qquad i=1,2,\dots,n.
+\end{aligned}
+$$
+
+式中 $C$ 是可以用交叉验证微调的正则化参数，$\sum_i\xi_i$ 为软误差，如果 $\xi_i=0$，则 $\mathbf{x}_i$ 没有问题；如果 $0<\xi_i\leq1$，则 $\mathbf{x}_i$ 被正确分类，但它在边缘上；如果 $\xi_i>1$，则 $\mathbf{x}_i$ 被错误分类。为了更好的泛化，不仅要惩罚误分类的点，也要惩罚边缘上的点，尽管后者在检验时被正确分类。
+
+我们继续像上面Hard-margin那样来进行分析，此时的拉格朗日方程为
+
+$$
+\mathcal{L}(\mathbf{w},b,\xi,\mathbf{\alpha},\lambda) = \dfrac{1}{2}||\mathbf{w}||^2 + C\sum_i\xi_i + \sum_i\alpha_i(1-\xi_i-y_i(\mathbf{w}^T\mathbf{x}_i+b))-\sum_i\lambda_i\xi_i
+$$
+
+其中 $\lambda$ 为新的拉格朗日参数，确保 $\xi$ 为正。对上式关于各参数求导，并令它们等于0，可得
+
+$$
+\begin{aligned}
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i \\
+&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad \sum_{i=1}^{n}\alpha_iy_i=0\\
+&\dfrac{\partial\mathcal{L}}{\partial \xi}=0\quad \Rightarrow \quad C-\alpha_i-\lambda_i=0
+\end{aligned}
+$$
+
+![soft](http://7xqutp.com1.z0.glb.clouddn.com/soft.png?imageView/2/w/550/q/100)
+
+在对实例进行分类时，对应着图中4种可能的情况：
+
+* (a) 实例在正确一侧且远离边缘；$\xi=0$，$
+* (b)
