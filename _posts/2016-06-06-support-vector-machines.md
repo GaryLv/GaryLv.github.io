@@ -77,7 +77,7 @@ $$
 $$
 \begin{aligned}
 &\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i \\
-&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad 0=\sum_{i=1}^{n}\alpha_iy_i
+&\dfrac{\partial\mathcal{L}}{\partial b}=0\quad \Rightarrow \quad 0=\sum_{i=1}^{n}\alpha_iy_i
 \end{aligned}
 $$
 
@@ -287,16 +287,41 @@ $$
 $$
 \begin{aligned}
 &\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0\quad \Rightarrow \quad \mathbf{w}=\sum_{i=1}^{n}\alpha_iy_i\mathbf{x}_i \\
-&\dfrac{\partial\mathcal{L}}{\partial \mathbf{b}}=0\quad \Rightarrow \quad \sum_{i=1}^{n}\alpha_iy_i=0\\
+&\dfrac{\partial\mathcal{L}}{\partial b}=0\quad \Rightarrow \quad \sum_{i=1}^{n}\alpha_iy_i=0\\
 &\dfrac{\partial\mathcal{L}}{\partial \xi}=0\quad \Rightarrow \quad C-\alpha_i-\lambda_i=0
 \end{aligned}
 $$
 
+由于 $\lambda\geq 0$，则可知 $0\leq \alpha \leq C$，将上式带入拉格朗日方程中得到关于 $\alpha$  的最大化对偶问题
 
+$$
+\begin{aligned}
+\max_{\mathbf{\alpha}} \sum_{i=1}^{n}\alpha_i-\dfrac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\alpha_i\alpha_jy_iy_j\mathbf{x}_i^T\mathbf{x}_j \\
+\end{aligned}
+$$
 
-![soft](http://7xqutp.com1.z0.glb.clouddn.com/soft.png?imageView/2/w/550/q/100)
+$$
+\begin{aligned}
+s.t. \quad &\sum_{i=1}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\\
+&0\leq\alpha_i\leq C,\qquad i=1,2,\dots,n.
+\end{aligned}
+$$
 
-在对实例进行分类时，对应着图中4种可能的情况：
+对软间隔支持向量机，KKT条件要求
+* $\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0$，$\dfrac{\partial\mathcal{L}}{\partial b}=0$，$\dfrac{\partial\mathcal{L}}{\partial \mathbf{\xi}}=0$
+* $y_i(\mathbf{w}^T\mathbf{x}_i+b)\geq 1-\xi_i$，$\xi_i\geq 0$
+* $\alpha_i\geq 0$，$\lambda_i\geq 0$
+* $\alpha_i[y_i(\mathbf{w}^T\mathbf{x}_i+b)- 1+\xi_i]=0$，  $\lambda_i\xi_i=0$
 
-* (a) 实例在正确一侧且远离边缘；$\xi=0$，$
-* (b)
+通过对 $\alpha_i$ 与 $\xi_i$ 的取值范围分析，可得如下的结论
+
+![soft](http://7xqutp.com1.z0.glb.clouddn.com/soft.png?imageView/2/w/450/q/90)
+
+**在对实例进行分类时，对应着图中4种可能的情况：**
+
+* a) 实例在正确一侧且远离边缘；$\alpha_i=0$，$\xi_i=0$
+* b) 实例在正确一侧且在边缘上；$0<\alpha_i<C$，$\xi_i=0$
+* c) 实例在正确一侧但在边缘内；$\alpha_i=C$，$0<\xi_i<1$
+* d) 实例在错误的一侧，是误分类；$\alpha_i=C$，$\xi_i>1$
+
+除 a) 之外，所有实例都是支撑向量。
