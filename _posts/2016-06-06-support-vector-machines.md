@@ -292,6 +292,8 @@ $$
 \end{aligned}
 $$
 
+
+
 ![soft](http://7xqutp.com1.z0.glb.clouddn.com/soft.png?imageView/2/w/550/q/100)
 
 在对实例进行分类时，对应着图中4种可能的情况：
