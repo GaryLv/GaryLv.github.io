@@ -19,7 +19,7 @@ tags:
 
 首先我们选取一个相对简单的情况 一 线性可分，假定我们已经有了训练数据集 $D=\\{(\mathbf{x}_1,y_1), (\mathbf{x}_2, y_2),\dots, (\mathbf{x}_n, y_n)\\},\quad  y_i\in\\{-1,+1\\}$ 如图1所示
 
-![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png?imageView/2/w/550/q/100)
+![demo](http://7xqutp.com1.z0.glb.clouddn.com/svm0.png?imageView/2/w/450/q/90)
 
 我们要做的就是找到那么一个超平面，使得离不同类别的样本最远，因为这样该分类器的鲁棒性最好，即使数据有噪声也不会轻易跑到另一类中去。设划分超平面方程为
 
@@ -308,6 +308,7 @@ s.t. \quad &\sum_{i=1}^{n}\alpha_iy_i=0 \qquad\qquad\qquad\qquad\\
 $$
 
 对软间隔支持向量机，KKT条件要求
+
 * $\dfrac{\partial\mathcal{L}}{\partial \mathbf{w}}=0$，$\dfrac{\partial\mathcal{L}}{\partial b}=0$，$\dfrac{\partial\mathcal{L}}{\partial \mathbf{\xi}}=0$
 * $y_i(\mathbf{w}^T\mathbf{x}_i+b)\geq 1-\xi_i$，$\xi_i\geq 0$
 * $\alpha_i\geq 0$，$\lambda_i\geq 0$
@@ -324,4 +325,4 @@ $$
 * c) 实例在正确一侧但在边缘内；$\alpha_i=C$，$0<\xi_i<1$
 * d) 实例在错误的一侧，是误分类；$\alpha_i=C$，$\xi_i>1$
 
-除 a) 之外，所有实例都是支撑向量。
+除 a) 之外，其他实例都是支撑向量。
