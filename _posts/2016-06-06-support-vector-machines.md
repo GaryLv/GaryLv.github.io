@@ -390,11 +390,11 @@ for kernel in ['rbf', 'linear']:
 
 #### Parameters Turning
 
-SVM的参数对算法的有效性有很大的影响，下面我们来看看 `sklearn` 内置函数 'kernel', 'gamma' 和 'C' 参数的对Iris数据集分类结果的影响。
+SVM的参数对算法的有效性有很大的影响，下面我们来看看 `sklearn` 内置函数参数 'kernel', 'gamma' 和 'C' 对 `Iris` 数据集分类结果的影响。
 
 ##### kernel
 
-这里对比下线性核，径向基核和多项式核的分类边界的不同，后两者适应于非线性边界。为方便观察，这里只取Iris数据集的两个属性
+这里对比下线性核，径向基核和多项式核的分类边界的不同，后两者适应于非线性边界。为方便观察，这里只取 `Iris` 数据集的两个属性
 
 ![kenel](http://7xqutp.com1.z0.glb.clouddn.com/svm_kernel.png)
 
