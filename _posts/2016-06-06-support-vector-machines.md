@@ -384,13 +384,31 @@ for kernel in ['rbf', 'linear']:
 
 混淆矩阵可视化如下：
 
-![confusion_matrix](http://7xqutp.com1.z0.glb.clouddn.com/svmcm.png)
+![confusion_matrix](http://7xqutp.com1.z0.glb.clouddn.com/svmcm.png?imageView/2/w/500/q/90)
 
 可见这里线性svm对手写数字有很好的分类能力。
+
+#### Parameters Turning
+
+SVM的参数对算法的有效性有很大的影响，下面我们来看看 `sklearn` 内置函数 'kernel', 'gamma' 和 'C' 参数的对Iris数据集分类结果的影响。
+
+##### kernel
+
+这里对比下线性核，径向基核和多项式核的分类边界的不同，后两者适应于非线性边界。为方便观察，这里只取Iris数据集的两个属性
+
+![kenel](http://7xqutp.com1.z0.glb.clouddn.com/svm_kernel.png)
+
+当数据的属性很大（如>1000时）可以选取线性核，因为在高维空间，数据很可能是线性可分的；最多采用的是径向基核，但一定要做交叉检验以防过拟合。
+
+##### gamma
+
 
 ### Reference
 
 * [https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb](https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb)
 * [https://github.com/jakevdp/sklearn_pycon2014/blob/master/notebooks/04_supervised_in_depth.ipynb](https://github.com/jakevdp/sklearn_pycon2014/blob/master/notebooks/04_supervised_in_depth.ipynb)
 * [https://www.analyticsvidhya.com/blog/2015/10/understaing-support-vector-machine-example-code/](https://www.analyticsvidhya.com/blog/2015/10/understaing-support-vector-machine-example-code/)
-*
+* [http://cs229.stanford.edu/materials.html](http://cs229.stanford.edu/materials.html)
+* [https://uwaterloo.ca/data-science/statistical-learning-classification](https://uwaterloo.ca/data-science/statistical-learning-classification)
+* Ethem Alpaydin 著, 范明, 昝红英，牛常勇译. 机器学习导论（第二版）[M]. 机械工业出版社.
+* 周志华.机器学习[M].清华大学出版社.
