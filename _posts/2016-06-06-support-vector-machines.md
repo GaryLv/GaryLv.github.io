@@ -402,6 +402,18 @@ SVM的参数对算法的有效性有很大的影响，下面我们来看看 `skl
 
 ##### gamma
 
+参数 `gamma`
+是 ‘rbf’, ‘poly’ 和 ‘sigmoid’ 的核参数（Kernel coefficient），其值越高，越倾向于fit每个训练数据。
+
+![http://7xqutp.com1.z0.glb.clouddn.com/gamma.png](http://7xqutp.com1.z0.glb.clouddn.com/gamma.png)
+
+##### C
+
+惩罚因子 `C` 控制着是更倾向于平滑决策平面还是准确地分类每个训练点
+
+![C](http://7xqutp.com1.z0.glb.clouddn.com/C.png)
+
+由上可知，我们需要关注交叉检验的结果来有效的调整这些参数，以避免过拟合。
 
 ### Reference
 
