@@ -326,3 +326,71 @@ $$
 * d) 实例在错误的一侧，是误分类；$\alpha_i=C$，$\xi_i>1$
 
 除 a) 之外，其他实例都是支撑向量。
+
+### Example
+
+#### Handwritten Digits Recognition
+
+该数据集共有1797个样本，每个样本为代表任意数字的8x8图片，数字共分为0-9的整数（即10类）。
+观察前64个样本如下
+
+```python
+from sklearn.datasets import load_digits
+
+digits = load_digits()
+X = digits.data
+y = digits.target
+
+fig = plt.figure(figsize = (6, 6))
+fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
+
+for i in range(64):
+    ax = fig.add_subplot(8, 8, i+1, xticks=[], yticks=[])
+    ax.imshow(digits.images[i], cmap=plt.cm.binary, interpolation='nearest')
+
+    ax.text(0, 7, str(digits.target[i]))
+```
+
+![Digits](http://7xqutp.com1.z0.glb.clouddn.com/digit.png)
+
+将数据分为训练集和测试集，采用核函数为径向基函数和线性函数的支持向量机进行训练，测试其准确性
+
+```python
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+from sklearn.cross_validation import train_test_split
+from sklearn import metrics
+
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, random_state=0)  
+for kernel in ['rbf', 'linear']:
+    clf = SVC(kernel=kernel).fit(Xtrain, ytrain)
+    ypred = clf.predict(Xtest)
+    print("SVC: kernel = {0}".format(kernel))
+    print(metrics.accuracy_score(ytest, ypred))
+    plt.figure()
+    plt.imshow(metrics.confusion_matrix(ypred, ytest),
+               interpolation='nearest', cmap=plt.cm.binary)
+    plt.colorbar()
+    plt.xlabel("true label")
+    plt.ylabel("predicted label")
+    plt.title("SVC: kernel = {0}".format(kernel))
+```
+二者训练集的正确率分别为
+
+    SVC: kernel = rbf
+    0.486666666667
+    SVC: kernel = linear
+    0.971111111111
+
+混淆矩阵可视化如下：
+
+![confusion_matrix](http://7xqutp.com1.z0.glb.clouddn.com/svmcm.png)
+
+可见这里线性svm对手写数字有很好的分类能力。
+
+### Reference
+
+* [https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb](https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb)
+* [https://github.com/jakevdp/sklearn_pycon2014/blob/master/notebooks/04_supervised_in_depth.ipynb](https://github.com/jakevdp/sklearn_pycon2014/blob/master/notebooks/04_supervised_in_depth.ipynb)
+* [https://www.analyticsvidhya.com/blog/2015/10/understaing-support-vector-machine-example-code/](https://www.analyticsvidhya.com/blog/2015/10/understaing-support-vector-machine-example-code/)
+*
