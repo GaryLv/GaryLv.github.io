@@ -396,7 +396,7 @@ SVM的参数对算法的有效性有很大的影响，下面我们来看看 `skl
 
 这里对比下线性核，径向基核和多项式核的分类边界的不同，后两者适应于非线性边界。为方便观察，这里只取 `Iris` 数据集的两个属性
 
-![kenel](http://7xqutp.com1.z0.glb.clouddn.com/svm_kernel.png)
+![kenel](http://7xqutp.com1.z0.glb.clouddn.com/kernels.png)
 
 当数据的属性很大（如>1000时）可以选取线性核，因为在高维空间，数据很可能是线性可分的；最多采用的是径向基核，但一定要做交叉检验以防过拟合。
 
