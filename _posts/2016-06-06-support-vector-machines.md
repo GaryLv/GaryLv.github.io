@@ -415,6 +415,10 @@ SVM的参数对算法的有效性有很大的影响，下面我们来看看 `skl
 
 由上可知，我们需要关注交叉检验的结果来有效的调整这些参数，以避免过拟合。
 
+### Conclusion
+
+本文为理解SVM引入了对其简单的推导过程，尽力能够与实际的物理含义相结合，以便于理解SVM是怎么来、为什么会是这样的模式以及可以怎么用。后面是应用SVM对手写数字识别问题的练习，以及对SVM参数的一点直观的分析。
+
 ### Reference
 
 * [https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb](https://github.com/jakevdp/sklearn_pycon2015/blob/master/notebooks/03.1-Classification-SVMs.ipynb)
