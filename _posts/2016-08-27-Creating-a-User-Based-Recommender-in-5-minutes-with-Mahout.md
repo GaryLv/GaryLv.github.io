@@ -3,7 +3,7 @@ layout: post
 title: Creating a User-Based Recommender in 5 minutes with Mahout
 date: 2016-08-27
 author: Run.D.Guan
-header-img: img/post-bg-os-metro.jpg
+header-img: img/post-bg-mah.jpg
 category: Hadoop
 tags:
   - Mahout
