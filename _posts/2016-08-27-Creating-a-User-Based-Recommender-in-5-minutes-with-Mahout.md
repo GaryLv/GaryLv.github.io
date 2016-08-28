@@ -16,7 +16,7 @@ tags:
 
 ### Prerequisites
 
-本文基本遵循`Mahout`官网上RECOMMENDATIONS下的Creating a User-Based Recommender in 5 minutes所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
+本文基本遵循`Mahout`官网上 RECOMMENDATIONS 下的 Creating a User-Based Recommender in 5 minutes所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
 
 配置好`Mahout`之后（我安装的版本为0.10.1），首先在`eclipse`中创建`maven project`，并在`pom.xml`中导入依赖如下
 
@@ -30,7 +30,7 @@ tags:
 </dependencies>
 ```
 
-下面是创建所需的数据集，`Mahout`的Recommender需要users和items作为输入，最简单的形式就是*userID, itemID, value*，用来表示user对item的打分（如电影评分）。在本例中，简单创建如下形式的数据（完整数据见Reference连接），并命名为"dataset.csv"。
+下面是创建所需的数据集，`Mahout`的 Recommender 需要 users 和 items 作为输入，最简单的形式就是 *userID, itemID, value*，用来表示 user 对 item 的打分（如电影评分）。在本例中，简单创建如下形式的数据（完整数据见Reference链接），并命名为"dataset.csv"。
 
     1,10,1.0
     1,11,2.0
@@ -55,13 +55,13 @@ tags:
 
 ### Creating a user-based recommender
 
-现在可以开始创建我们的first recommender啦。新建一个类命名为*SampleRecommender*，并添加main方法。首先我们要做的是从文件中加载数据。`Mahout`的recommender使用`DataModel`的接口来处理数据，代码如下（我的dataset.csv在root目录下）
+现在可以开始创建我们的 first recommender 啦。新建一个类命名为*SampleRecommender*，并添加main方法。首先我们要做的是从文件中加载数据。`Mahout`的 recommender 使用`DataModel`的接口来处理数据，代码如下（我的dataset.csv在root目录下）
 
 ```java
 DataModel model = new FileDataModel(new File("/root/dataset.csv"));
 ```
 
-这里我们要创建的是一个user-based recommender，其思路是当我们想推荐物品给一特定的用户时，先看看和他有相同品味的用户，然后将他们喜欢的物品再推荐给他。为了找到相似的用户，我们需要描述他们之间的相关程度，有好几种可以采用的方法，这里我们采用很流行的[Pearson product-moment correlation coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)。在`Mahout`中，实现如下：
+这里我们要创建的是一个 user-based recommender，其思路是当我们想推荐物品给一特定的用户时，先看看和他有相同品味的用户，然后将他们喜欢的物品再推荐给他。为了找到相似的用户，我们需要描述他们之间的相关程度，有好几种可以采用的方法，这里我们采用很流行的[Pearson product-moment correlation coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)。在`Mahout`中，实现如下：
 
 ```java
 UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
@@ -83,8 +83,8 @@ UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighb
 
 ```java
 List<RecommendedItem> recommendations = recommender.recommend(2, 3);
-		for (RecommendedItem recommenndation : recommendations)
-			System.out.println(recommenndation);
+for (RecommendedItem recommenndation : recommendations)
+	System.out.println(recommenndation);
 ```
 
 得到的输出结果为
@@ -93,7 +93,7 @@ List<RecommendedItem> recommendations = recommender.recommend(2, 3);
     RecommendedItem[item:13, value:4.6656213]
     RecommendedItem[item:14, value:4.331242]
 
-可以看到结果是按value排序的，value越大，越是适用于推荐给该用户的物品。
+可以看到结果是按 value 排序的，value 越大，越是适用于推荐给该用户的物品。
 
 是时候总结一下`Mahout`的推荐过程了。`Mahout`是由多个组件混搭而成的，而非单一的推荐引擎，其各个组件的组合可以定制，从而针对特定应用提供理想的推荐。通常包括如下的组件：
 
@@ -135,3 +135,5 @@ public class SampleRecommender {
 	}
 }
 ```
+
+### Evaluation
