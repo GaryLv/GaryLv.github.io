@@ -16,7 +16,7 @@ tags:
 
 ### Prerequisites
 
-本文基本遵循`Mahout`官网上 RECOMMENDATIONS 下的 Creating a User-Based Recommender in 5 minutes所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
+本文基本遵循`Mahout`官网上 RECOMMENDATIONS 下的 [Creating a User-Based Recommender in 5 minutes](http://mahout.apache.org/users/recommender/userbased-5-minutes.html)所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
 
 配置好`Mahout`之后（我安装的版本为0.10.1），首先在`eclipse`中创建`maven project`，并在`pom.xml`中导入依赖如下
 
@@ -61,7 +61,7 @@ tags:
 DataModel model = new FileDataModel(new File("/root/dataset.csv"));
 ```
 
-这里我们要创建的是一个 user-based recommender，其思路是当我们想推荐物品给一特定的用户时，先看看和他有相同品味的用户，然后将他们喜欢的物品再推荐给他。为了找到相似的用户，我们需要描述他们之间的相关程度，有好几种可以采用的方法，这里我们采用很流行的[Pearson product-moment correlation coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)。在`Mahout`中，实现如下：
+这里我们要创建的是一个 user-based recommender，其思路是当我们想推荐物品给一特定的用户时，先看看和他有相同品味的用户，然后将他们喜欢的物品再推荐给他。为了找到相似的用户，我们需要描述他们之间的相关程度，有好几种可以采用的方法，这里我们采用很实用的[Pearson product-moment correlation coefficient](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)。在`Mahout`中，实现如下：
 
 ```java
 UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
@@ -137,3 +137,53 @@ public class SampleRecommender {
 ```
 
 ### Evaluation
+
+构建出一个推荐系统之后就会想这个推荐系统是否能比较准确的给出期望的推荐。但不幸的是，要想知道推荐系统的优异只能在现实中做A/B test。
+
+鉴于我们手头的数据，因为相当于有 label，因此我们可以做 **hold-out** test。把数据分成两份 -- 训练集和测试集。为了测试我们的 recommender，新建一个类 EvaluateRecommender，并包含 main 方法，为直观起见，所有代码如下：
+
+```java
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
+import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
+import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
+
+public class EvaluateRecommender {
+	public static void main(String[] args) throws IOException, TasteException {
+		// TODO Auto-generated method stub
+		DataModel model = new FileDataModel(new File("/root/dataset.csv"));
+		RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
+		RecommenderBuilder builder = new RecommenderBuilder() {
+			public Recommender buildRecommender(DataModel dataModel) throws TasteException {
+				UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
+				UserNeighborhood neighborhood = new NearestNUserNeighborhood(2, similarity, dataModel);
+				return new GenericUserBasedRecommender(dataModel, neighborhood, similarity);
+			}
+		};
+		double result = evaluator.evaluate(builder, null, model, 0.9, 1.0);
+		System.out.println(result);
+	}
+}
+```
+
+其中在`RecommenderBuilder`接口上使用匿名内部类来构建我们的 user-based recommender。为了检测预测值与真实评分的差异，我们采用了`AverageAbsoluteDifferenceRecommenderEvaluator`，其得到的结果意味着估计值与实际值的偏差。`evaluate`方法中0.9代表训练集的百分比，后面的1.0代表用于构建推荐系统的数据量所占总数据量的百分比，当数据量很大又想快速评估的话，可以减小该值。
+
+### Conclusion
+
+至此我们已经构建出了一个简单的推荐系统，并能对它进行一定的评估。同时也熟悉了`Mahout`的一些基本概念。
+
+### Reference
+
+* [Creating a User-Based Recommender in 5 minutes](http://mahout.apache.org/users/recommender/userbased-5-minutes.html)
+* Sean Owen, Robin Anil等著, 王斌, 韩冀中等译.Mahout 实战[M].人民邮电出版社.
