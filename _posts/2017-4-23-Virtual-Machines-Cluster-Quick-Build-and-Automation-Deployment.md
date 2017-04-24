@@ -44,7 +44,7 @@ tags:
 进入到Desktop版CentOS中，采用编辑配置文件方式的非图形化方法配置静态网络参数
 
 ```
-    vi /etc/sysconfig/network-scripts/ifcfg-eth0
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
 
 ![net3](http://7xqutp.com1.z0.glb.clouddn.com/net3.png)
@@ -91,13 +91,13 @@ RTNETLINK answers: File exists                             [  OK  ]
 刚克隆完成的虚拟会出现没有eth0的问题，因此修改网络配置，删掉`UUID`和`HWADDR`，并修改好静态`IPADDR`
 
 ```
-    vi /etc/sysconfig/network-scripts/ifcfg-eth0
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
 
 之后可以简单删除如下文件，重启后会自动生成所需的eth0信息。或是进入修改将eth1改成eth0，将原有的eth0删除
 
 ```
-    rm -rf 　/etc/udev/rules.d/70-persistent-net.rules
+rm -rf 　/etc/udev/rules.d/70-persistent-net.rules
 ```
 
 reboot便完成了虚拟机的克隆，重复操作步骤便可完成其他mini版虚拟机的克隆。
@@ -109,12 +109,12 @@ reboot便完成了虚拟机的克隆，重复操作步骤便可完成其他mini�
 首先安装httpd服务器
 
 ```
-    yum install httpd
+yum install httpd
 ```
 
 开启httpd服务器
 
-        service httpd start
+    service httpd start
 
 将JDK复制到`/var/www/html/software`下，其中`software`子目录需要自己创建，这时我们登陆到服务器上
 
@@ -124,7 +124,7 @@ reboot便完成了虚拟机的克隆，重复操作步骤便可完成其他mini�
 
 配置免密登陆需要先在主服务器上生成公钥私钥对
 
-        ssh-keygen -t rsa
+    ssh-keygen -t rsa
 
 这样便可将本机的公钥发送到对方机器(`ssh-copy-id`)以实现ssh免密登陆。现直接来看运行的脚本代码`boot.sh`
 
@@ -180,20 +180,26 @@ source /etc/profile
 
 需要注意的是由于从服务器安装的是mini版本，并未安装scp命令，它从属于openssh-clients.x86_64
 
-        yum install -y openssh-clients.x86_64
+    yum install -y openssh-clients.x86_64
 
 同时还需安装expect语言
 
-        yum install expect
+    yum install expect
 
 同时也将expect依赖的tcl安装好了。
 
 此时运行脚本的障碍已经铲除了，准备运行脚本，首先在主服务器上添加这两个脚本的运行权限
 
-        chmod +x install_everyone.sh boot.sh
+    chmod +x install_everyone.sh boot.sh
 
 在当前目录运行
 
-        ./boot.sh
+    ./boot.sh
 
-便开始了自动化部署:grinning:
+便开始了自动化部署 :grinning:
+
+在其中一台mini版的机器上测试JDK安装情况，在Terminal中输入java
+
+![net6](http://7xqutp.com1.z0.glb.clouddn.com/net6.png)
+
+看来JDK安装成功了，本节工作顺利结束~
