@@ -3,17 +3,17 @@ layout: post
 title: Virtual Machines Cluster Quick Build and Automation Deployment
 date: 2017-04-23
 author: Run.D.Guan
-header-img: img/post-bg-mah.jpg
+header-img: img/post-phuket-cluster.jpg
 category: Linux Basic
 tags:
   - Cluster Deployment
 ---
 
-本文介绍如何简单快速部署虚拟机集群，网络配置以及在主服务器中通过`shell`脚本自动化部署从服务器中的软件。作为以后大数据开发的集群基础。
+本文介绍如何简单快速进行虚拟机集群部署，网络配置以及在主服务器中通过`shell`脚本自动化部署从服务器软件，以作为后续大数据开发的集群基础。
 
 ### CentOS 6.8虚拟机集群安装配置
 
-我们的目标是建立一个主服务器，以Desktop版本安装，另外四台从服务器以mini版安装，具体来讲是先安装一台mini版，并通过它克隆出其他三台，以达到节约时间和磁盘空间的目的。
+我们的目标是配置一台Desktop版本的主服务器，另外四台mini版从服务器的集群，并在主服务器中自动化部署集群机器的JDK，以及处理各部分的技术细节。
 
 具体的虚拟机安装过程不再赘述，现假设已安装好CentOS Desktop版一台，和mini版一台。
 
@@ -41,7 +41,7 @@ tags:
 
 #### 设置虚拟机网络参数
 
-进入到Desktop版CentOS中，采用编辑配置文件方式的非图形化方法配置静态网络参数
+进入到Desktop版CentOS中，采用编辑配置文件方式非图形化方法配置静态网络参数
 
 ```
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -67,7 +67,7 @@ RTNETLINK answers: File exists                             [  OK  ]
 可见网络配置已经成功。之后mini版的可按同样步骤进行，只是`IPADDR`设置为192.168.200.101。为方便以后各台服务器互相通信，将各台服务器的IP地址与主机名对应起来
 
 ```
-[root@master ~]# vi /etc/hosts
+[root@master ~]/# vi /etc/hosts
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -84,7 +84,7 @@ RTNETLINK answers: File exists                             [  OK  ]
 
 #### 虚拟机克隆
 
-此时我们只有一台Desktop版和一台mini版，还需要另外三台mini版，所以可以通过虚拟机克隆的方法迅速得到另外三台mini版。在VMware中右键mini1虚拟机，点击管理下的克隆，按提示顺序进行。其中克隆方法要选择创建完整克隆。克隆好的虚拟机还需配置网络，尤其网卡等问题。
+此时我们只有一台Desktop版和一台mini版，还需要另外三台mini版，所以可以通过虚拟机克隆的方法迅速得到另外三台mini版，以达到节约时间和节省空间的目的。在VMware中右键mini1虚拟机，点击"管理"下的"克隆"，按提示顺序进行。其中克隆方法要选择创建完整克隆。克隆好的虚拟机还需配置网络，尤其网卡等问题。
 
 ##### 克隆虚拟机网络配置
 
@@ -162,7 +162,7 @@ do
 done
 ```
 
-其中ssh_copy_id_to_all实现了遍历每个从服务器，并配置好ssh免密登陆。子函数auto_ssh_copy_id实现了将主服务器的公钥传给从服务器，并在expect中模拟系统提示人机交互，省去了手动输入密码等的麻烦。代码最后是通过scp命令将下载配置脚本`install_everyone.sh`发送到没台从服务器中，并ssh登陆运行该脚本。`install_everyone.sh`实现了下载JDK并解压同时配置环境变量的过程，代码如下
+其中`ssh_copy_id_to_all()`实现了遍历每个从服务器，并配置好`ssh`免密登陆。子函数`auto_ssh_copy_id()`实现了将主服务器的公钥传给从服务器，并在`expect`中模拟系统提示人机交互，省去了手动输入密码等的麻烦。代码最后是通过`scp`命令将下载配置脚本`install_everyone.sh`发送到没台从服务器中，并`ssh`登陆运行该脚本。`install_everyone.sh`实现了下载JDK并解压同时配置环境变量的过程，代码如下
 
 ```shell
 #!/bin/bash
@@ -178,15 +178,15 @@ EOF
 source /etc/profile
 ```
 
-需要注意的是由于从服务器安装的是mini版本，并未安装scp命令，它从属于openssh-clients.x86_64
+需要注意的是由于从服务器安装的是mini版本，并未安装`scp`命令，它从属于`openssh-clients.x86_64`
 
     yum install -y openssh-clients.x86_64
 
-同时还需安装expect语言
+同时还需安装`expect`语言
 
     yum install expect
 
-同时也将expect依赖的tcl安装好了。
+同时也将`expect`依赖的`tcl`安装好了。
 
 此时运行脚本的障碍已经铲除了，准备运行脚本，首先在主服务器上添加这两个脚本的运行权限
 
@@ -196,7 +196,7 @@ source /etc/profile
 
     ./boot.sh
 
-便开始了自动化部署 :grinning:
+便开始了自动化部署 `:grinning:`
 
 在其中一台mini版的机器上测试JDK安装情况，在Terminal中输入java
 
