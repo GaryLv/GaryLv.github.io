@@ -193,7 +193,6 @@ source /etc/profile
     chmod +x install_everyone.sh boot.sh
 
 在当前目录运行
-
     ./boot.sh
 
 便开始了自动化部署 `:grinning:`

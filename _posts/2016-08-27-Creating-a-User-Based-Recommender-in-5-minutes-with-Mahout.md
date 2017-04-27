@@ -16,7 +16,7 @@ tags:
 
 ### Prerequisites
 
-本文基本遵循`Mahout`官网上 RECOMMENDATIONS 下的 [Creating a User-Based Recommender in 5 minutes](http://mahout.apache.org/users/recommender/userbased-5-minutes.html)所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
+本文基本遵循`Mahout`官网上 RECOMMENDATIONS 下的 [Creating a User-Based Recommender in 5 minutes](http://mahout.apache.org/users/recommender/userbased-5-minutes.html) 所写，并加入更多的注解以解释how to quickly build a Recommender System with Mahout。
 
 配置好`Mahout`之后（我安装的版本为0.10.1），首先在`eclipse`中创建`maven project`，并在`pom.xml`中导入依赖如下
 
