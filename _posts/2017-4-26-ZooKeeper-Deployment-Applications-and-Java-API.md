@@ -220,7 +220,7 @@ ZooKeeper的主要监听数据和节点的工作都已实现。以上我们通�
 
 为方便进行各项功能测试，这里采用单元测试模式进行开发，每项功能都由一个函数完成，函数功能由注释说明。
 
-```Java
+```java
 import java.util.List;
 
 import org.apache.zookeeper.CreateMode;
@@ -342,7 +342,7 @@ NodeChildrenChanged---/
 - 启动业务功能
 
 服务器端代码为
-```Java
+```java
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -408,7 +408,7 @@ public class DistributedServer {
 - 业务线程启动
 
 客户端代码如下
-```Java
+```java
 import java.util.ArrayList;
 import java.util.List;
 
