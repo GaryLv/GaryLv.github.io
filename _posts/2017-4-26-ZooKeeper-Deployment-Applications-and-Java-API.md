@@ -218,7 +218,71 @@ ZooKeeper的主要监听数据和节点的工作都已实现。以上我们通�
 ### ZooKeeper in Java
 #### ZooKeeper Java API
 
-为方便进行各项功能测试，这里采用单元测试模式进行开发，每项功能都由一个函数完成，函数功能由注释说明。
+这里我们考虑最常用的ZooKeeper API，ZooKeeper API 的核心部分是ZooKeeper class，它在构造器中提供了连接ZooKeeper ensemble的方法以及其他成员函数
+- **create** -- 创建节点
+- **exists** -- 判断节点是否存在
+- **getChildren** -- 获取znode下所有子节点
+- **getData** -- 获取znode的数据
+- **delete** -- 删除znode以及它的所有子节点
+- **setData** -- 修改znode的数据
+
+下面依次介绍上面函数模式与参数
+
+##### **连接ZooKeeper ensemble函数**
+```java
+ZooKeeper(String connectionString, int sessionTimeout, Watcher watcher)
+```
+- **connectionString** -- ZooKeeper ensemble 主机名
+- **sessionTimeout** -- 会话超时时间/ms
+- **watcher** -- 继承"Watcher"的对象，ZooKeeper ensemble通过watcher返回连接状态
+
+##### **创建znode节点**
+```java
+create(String path, byte[] data, List<ACL> acl, CreateMode createMode)
+```
+- **path** -- znode 路径
+- **data** -- znode 路径下存储的数据
+- **acl** -- access control list，表征权限的，如`Ids.OPEN_ACL_UNSAFE`返回的是open znode的acl list
+- **createMode** -- 节点的类别，znode有（非）临时节点，（非）序列化，四种组合类型
+
+##### **判断节点是否存在**
+```java
+exists(String path, boolean watcher)
+```
+- **path** -- znode 路径
+- **watcher** -- 布尔类型，确定是否需要对此监听
+
+##### **获取znode下所有子节点**
+```java
+getChildren(String path, Watcher/boolean watcher)
+```
+- **path** -- znode 路径
+- **watcher** -- "Watcher"类型的回调函数，当指定的znode被删除或其子节点被创建/删除，ZooKeeper ensemble会收到通知。注意这只是一次监听；布尔类型确定是否需要监听
+
+##### **获取znode的数据**
+```java
+getData(String path, Watcher watcher, Stat stat)
+```
+- **path** -- znode 路径
+- **watcher** -- "Watcher"类型的回调函数，当指定的znode被删除或其子节点被创建/删除，ZooKeeper ensemble会收到通知。注意这只是一次监听；布尔类型确定是否需要监听
+- **stat** -- 返回znode的元数据
+
+##### **删除znode以及它的所有子节点**
+```java
+delete(String path, int version)
+```
+- **path** -- znode 路径
+- **version** -- 当前znode的版本。如果传递参数版本参数为-1，则匹配所有版本
+
+##### **修改znode的数据**
+```java
+setData(String path, byte[] data, int version)
+```
+- **path** -- znode 路径
+- **data** -- znode下存储的数据
+- **version** -- 当前znode的版本。当数据改变后ZooKeeper会更新znode的版本号
+
+为方便进行各项功能测试，这里采用单元测试模式进行开发，每项功能都由一个函数完成，有注释对每项功能进行说明。
 
 ```java
 import java.util.List;
