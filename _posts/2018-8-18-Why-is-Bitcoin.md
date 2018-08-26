@@ -12,7 +12,7 @@ tags:
 ---
 > Sorry to be a wet blanket. But, writing a description of Bitcoin for general audiences is bloody hard. There's nothing to relate it to.
 >
->&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;- Satoshi Nakamoto, July 5, 2010
+>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;- Satoshi Nakamoto, July 5, 2010
 
 ### 探寻起源
 比特币逐渐被世人接受必然有它的价值所在，它诞生的背景决定了它要解决当前金融体系哪些弊端，首先来看看当时甚至现在依旧存在的问题
@@ -20,9 +20,19 @@ tags:
 - **货币超发** -- 政府总是有超发货币的倾向来扩大投资以保证经济增速保持在预期水平，还可以充实自己，但会导致民众的财富缩水。直接导火索是2008年美国金融危机，美国政府开始给自己印钞票，民众的钱缩水，物价上涨。比特币的创始人（或组织）中本聪看不下去了，后来发明出比特币。
 - **中心化的被攻击风险** -- 当前金融系统基本都是中心化的模式，中心化有中心化明显优势，如信用背书，但他们权力过于集中，可能自己存的钱被他们用于别的用途；同时记账权是在他们手里，账本是集中管理的，当它遭遇黑客攻陷后损失是毁灭的。
 
-基于以上以及其他现实存在的问题，中本聪于2008年发表论文[《比特币：一种点对点的电子现金系统》](https://bitcoin.org/bitcoin.pdf)，文中介绍了一种通过点对点的方式在线从一端转移到另一端而不经过任何金融机构的电子现金，其中用到的核心创新技术就是区块链。下面来看看比特币的运行流程，再来分析一下它解决了之前数字货币解决不了的问题，最后总结下比特币的价值。
+基于以上以及其他现实存在的问题，中本聪于2008年发表论文[《比特币：一种点对点的电子现金系统》](https://bitcoin.org/bitcoin.pdf)，文中介绍了一种通过点对点的方式在线从一端转移到另一端而不经过任何金融机构的电子现金，其中用到的核心创新技术就是区块链。
+- 2008年
+  - 8月18日 "bitcoin.org"域名注册
+  - 10月31日 比特币白皮书发布
+  - 11月09日 比特币项目在SourceForge.net注册
+- 2009年
+  - 1月03日 创世区块于18:15:05 GMT被挖出
+  - 1月09日 比特币v0.1发布
+  - 1月12日 第一笔比特币交易，由Satoshi到Hal Finney记录在170号区块中
 
-### 比特币运行流程
+下面来看看比特币的运行流程，再来分析一下它解决了之前数字货币解决不了的问题，最后总结下比特币的价值。
+
+### 比特币运行流程简述
 比特币用户在电脑上运行比特币客户端软件，这样的电脑称为一个节点（node）。大量节点电脑互相连接，形成一张像蜘蛛网一样的P2P（点对点）网络。
 
 ![](http://bitcoinromania.ro/wp-content/uploads/2016/07/bitcoin-peer-to-peer.png)
@@ -36,13 +46,14 @@ tags:
 ![](http://blogs.thomsonreuters.com/answerson/wp-content/uploads/sites/3/2016/01/infographic-how-blockchain-works.jpg)
 
 这些交易都会被存在区块中，新被矿工“挖”出的区块通过哈希指针指向它之前的区块，由此构建出的链表称为区块链。
-![](http://7xqutp.com1.z0.glb.clouddn.com/blockchainds.png)
-哈希指针不止能存储数据位置信息还记录位置数据的哈希值，因此可以验证数据有没有被篡改过。
+![](http://7xqutp.com1.z0.glb.clouddn.com/blockchain.png)
+哈希指针不止能存储数据位置信息还记录位置数据的哈希值，因此可以验证数据有没有被篡改过。区块链头部的哈希指针被称作创世区块（genesis block），它是被大家所公认的所以不能被恶意修改，因此当我们锁定了区块链的头部，即使对手修改了所有哈希指针使其与修改过的数据一致，那么呀也无法修改头部数据，从而可以检测到篡改行为。
+
+实际应用过程中为了提供效率会引入如下图所示的梅克尔树（Merkle tree）的数据结构。包含数据的区块构成了叶子节点，将其两两分组，为每一组建立一个有两个哈希指针的数据结构，每个指针对应一个区块。再轮流为每个区块组哈希指针建立一个新的哈希指针数据结构，知道得到单一区块，即根节点。
+
 ![](http://7xqutp.com1.z0.glb.clouddn.com/merkletree.png)
 
-
-
-
+当记住根节点的两个哈希指针，我们可以通过哈希指针回溯到列表的任何位置，这让我们保证数据确实没有被篡改过。如果整棵树上有 $n$ 个节点，验证某个数据区块隶属于梅克尔树需要的时间约为 $log(n)$ 。即使梅克尔树包含大量的区块，我们仍可以以相对较短的时间证明隶属关系。
 
 ### 比特币解决的技术问题
 #### 分布式共识
@@ -60,3 +71,5 @@ tags:
 * [What is Cryptocurrency: Everything You Need To Know](https://blockgeeks.com/guides/what-is-cryptocurrency/)
 * [比特币创造的价值在哪](https://www.zhihu.com/question/21418402/answer/71274765)
 * 《区块链技术驱动金融》
+* [比特币有什么特性和好处](https://www.8btc.com/video/242407)
+* [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf)
