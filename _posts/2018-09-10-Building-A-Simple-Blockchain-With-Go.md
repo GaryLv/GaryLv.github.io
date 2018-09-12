@@ -47,9 +47,11 @@ type Book struct {
 	ISBN        string `json:"isbn"`
 }
 ```
+
 ### Hashing and Generating Blocks
 对整个区块计算哈希值，这里简单的将区块头部和内容以字符串形式拼接在一起，然后通过`SHA-256`方法来计算区块的哈希值。
-```
+
+```go
 func (b *Block) generateHash() {
   // get string val of the Data
   bytes, _ := json.Marshal(b.Data)
@@ -60,6 +62,7 @@ func (b *Block) generateHash() {
   b.Hash = hex.EncodeToString(hash.Sum(nil))
 }
 ```
+
 有了借阅信息，又能够计算区块的哈希值，这样就能创建新区块了，下面通过函数`CreateBlock`来创建个新区块
 
 ```golang
