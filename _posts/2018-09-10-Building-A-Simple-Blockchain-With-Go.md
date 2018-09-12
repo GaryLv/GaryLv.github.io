@@ -49,8 +49,7 @@ type Book struct {
 ```
 ### Hashing and Generating Blocks
 对整个区块计算哈希值，这里简单的将区块头部和内容以字符串形式拼接在一起，然后通过`SHA-256`方法来计算区块的哈希值。
-
-```golang
+```
 func (b *Block) generateHash() {
   // get string val of the Data
   bytes, _ := json.Marshal(b.Data)
