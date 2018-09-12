@@ -4,7 +4,7 @@ title:  "Building A Simple Blockchain with Go"
 subtitle:   ""
 date:   2018-09-10
 author: Run.D.Guan
-header-img: "img/falls.jpg"
+header-img: "img/grass.jpg"
 category: Blockchain
 tags:
     - Blockchain
@@ -23,7 +23,7 @@ tags:
 ### Blocks
 前面介绍过区块记录着有价值的信息，如交易记录和系统相关的如时间戳、上一个区块的哈希值等。根据这个大体规则这里简单定义下区块的数据结构，内容`Data`就是书籍的借阅信息，`Pos`为区块号，`Timestamp`为创建的该区块的时间戳，`Hash`为该区块的哈希值，`PrevHash`为上一区块的哈希值。
 
-```go
+```golang
   // Block contains data that will be written to the blockchain.
   type Block struct {
     Pos       int
@@ -53,7 +53,7 @@ tags:
 ### Hashing and Generating Blocks
 对整个区块计算哈希值，这里简单的将区块头部和内容以字符串形式拼接在一起，然后通过`SHA-256`方法来计算区块的哈希值。
 
-```go
+```golang
 func (b *Block) generateHash() {
   // get string val of the Data
   bytes, _ := json.Marshal(b.Data)
@@ -66,7 +66,7 @@ func (b *Block) generateHash() {
 ```
 有了借阅信息，又能够计算区块的哈希值，这样就能创建新区块了，下面通过函数`CreateBlock`来创建个新区块
 
-```go
+```golang
 func CreateBlock(prevBlock *Block, checkoutItem BookCheckout) *Block {
   block := &Block{}
   block.Pos = prevBlock.Pos + 1
