@@ -24,31 +24,28 @@ tags:
 前面介绍过区块记录着有价值的信息，如交易记录和系统相关的如时间戳、上一个区块的哈希值等。根据这个大体规则这里简单定义下区块的数据结构，内容`Data`就是书籍的借阅信息，`Pos`为区块号，`Timestamp`为创建的该区块的时间戳，`Hash`为该区块的哈希值，`PrevHash`为上一区块的哈希值。
 
 ```golang
-  // Block contains data that will be written to the blockchain.
-  type Block struct {
-    Pos       int
-    Data      BookCheckout
-    Timestamp string
-    Hash      string
-    PrevHash  string
-  }
+type Block struct {
+	Pos       int
+	Timestamp string
+	Hash      string
+	PrevHash  string
+	Data      BookCheckout
+}
 
-  // BookCheckout contains data for a checked out book
-  type BookCheckout struct {
-    BookID       string `json:"book_id"`
-    User         string `json:"user"`
-    CheckoutDate string `json:"checkout_date"`
-    IsGenesis    bool   `json:"is_genesis"`
-  }
+type BookCheckout struct {
+	BookID       string `json:"book_id"`
+	User         string `json:"user"`
+	CheckoutDate string `json:"checkout_date"`
+	IsGenesis    bool   `json:"is_genesis"`
+}
 
-  // Book contains data for a sample book
-  type Book struct {
-    ID          string `json:"id"`
-    Title       string `json:"title"`
-    Author      string `json:"author"`
-    PublishDate string `json:"publish_date"`
-    ISBN        string `json:"isbn:`
-  }
+type Book struct {
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Author      string `json:"author"`
+	PublishDate string `json:"publish_date"`
+	ISBN        string `json:"isbn"`
+}
 ```
 ### Hashing and Generating Blocks
 对整个区块计算哈希值，这里简单的将区块头部和内容以字符串形式拼接在一起，然后通过`SHA-256`方法来计算区块的哈希值。
