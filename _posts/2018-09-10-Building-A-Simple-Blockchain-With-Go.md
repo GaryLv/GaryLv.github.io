@@ -4,7 +4,7 @@ title:  "Building A Simple Blockchain with Go"
 subtitle:   ""
 date:   2018-09-10
 author: Run.D.Guan
-header-img: "img/grass.jpg"
+header-img: "img/MLake.jpg"
 category: Blockchain
 tags:
     - Blockchain
@@ -21,7 +21,7 @@ tags:
 ![](https://blockchain-jp.com/wp-content/uploads/2018/04/94716618dd7b2339e0bc797c93396611-790x450.png)
 
 ### Blocks
-前面介绍过区块记录着有价值的信息，如交易记录和系统相关的如时间戳、上一个区块的哈希值等。根据这个大体规则这里简单定义下区块的数据结构，内容`Data`就是书籍的借阅信息，`Pos`为区块号，`Timestamp`为创建的该区块的时间戳，`Hash`为该区块的哈希值，`PrevHash`为上一区块的哈希值。
+前面介绍过区块记录着有价值的信息，如交易记录和系统相关的如时间戳、上一个区块的哈希值等。根据这个大体规则这里简单定义下区块的数据结构，内容`Data`就是书籍的借阅信息，`Pos`为区块号，`Timestamp`为创建的该区块的时间戳，`Hash`为该区块的哈希值，`PrevHash`为上一区块的哈希值。如果代码显示效果不好请移步[这里](https://github.com/GaryLv/GaryLv.github.io/blob/master/_posts/2018-09-10-Building-A-Simple-Blockchain-With-Go.md)
 
 ```golang
 type Block struct {
