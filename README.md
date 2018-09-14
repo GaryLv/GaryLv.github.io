@@ -1,6 +1,6 @@
 # Guan Blog
 
-###[View Live Guan Blog &rarr;](http://garylv.github.io/)
+### [View Live Guan Blog &rarr;](http://garylv.github.io/)
 
 ![](/img/preface.PNG)
 
