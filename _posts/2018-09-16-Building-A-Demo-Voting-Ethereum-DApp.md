@@ -27,8 +27,9 @@ tags:
 以太坊是一个有智能合约功能的公共区块链平台。如果拿智能手机打个比方，以太坊就是手机里的操作系统，智能合约就是上面搭载的应用。有了以太坊，开发者就可以直接开发自己的区块链应用而不太需要关心区块链的底层系统。以太坊作为一个**可编程区块链**的核心是以太坊虚拟机（EVM）。每个以太坊节点都运行着EVM，EVM是一个图灵完备的虚拟机，这意味着通过它可以实现各种复杂的逻辑。用户在以太坊网络中发布或者调用的智能合约就是运行在EVM上的。
 
 ### 冒烟测试
+要构建一个dApp涉及到的依赖较多，为了保证dApp的功能首先要测试下工程在初始化构建时候的功能性，下面就要进行前期工程的测试了。
 #### 依赖安装
-为了构建dApp，需要先安装些依赖
+为了构建dApp，需要先安装些涉及到的依赖
 ##### NPM
 首先要安装的依赖就是NPM，可以通过Node.js来安装
 ##### Truffle Framework
@@ -105,3 +106,87 @@ module.exports = function(deployer) {
 验证结果如下，可以看到应用的地址和正确的参选人的名字，证明我们的工程能够正确执行
 
 ![](http://7xqutp.com1.z0.glb.clouddn.com/smoketest1.png)
+
+### 参选人
+接下来就真正进入到代码功能实现中来了，首先当然要给参选人建模，并把他组成一个数组。下面的代码中可以看到通过`Solidity Struct`来对参选人建模，并通过`mapping`来存储成数组，并定义一个记录参选人个数的变量candidatesCount（因为在Solidity中没办法确定mapping的变量个数，所以多出来个计数器）。
+
+```solidity
+contract Election {
+    struct Candidate {
+        uint id;
+        string name;
+        uint voteCount;
+    }
+
+    mapping(uint => Candidate) public candidates;
+    uint public candidatesCount;
+}
+```
+
+接下来定义函数来向mapping中添加参选人
+
+    function addCandidate (string _name) private {
+        candidatesCount ++;
+        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+    }
+
+这里我们仅仅只新建两个参选人，添加合约的构造函数如下
+
+    function Election () public {
+        addCandidate("Candidate 1");
+        addCandidate("Candidate 2");
+    }
+
+下面需要重新部署合约，因为这是部署在区块链上的，如果智能合约修改，重新部署，之前的所有记录都会消失，重新开始添加区块，所以在一个智能合约下，数据是不可变的。部署合约命令如下
+
+    $ truffle migrate --reset
+
+#### 测试
+智能合约可是非常严肃的，上线之后要是出问题是很严重的，所以前期我们要做好自测工作。在test，目录下新建election.js，通过Mocha测试框架和Chai断言库来编写我们的测试用例。
+
+```javascript
+var Election = artifacts.require("./Election.sol");
+
+contract("Election", function(accounts) {
+  var electionInstance;
+
+  it("initializes with two candidates", function() {
+    return Election.deployed().then(function(instance) {
+      return instance.candidatesCount();
+    }).then(function(count) {
+      assert.equal(count, 2);
+    });
+  });
+
+  it("it initializes the candidates with the correct values", function() {
+    return Election.deployed().then(function(instance) {
+      electionInstance = instance;
+      return electionInstance.candidates(1);
+    }).then(function(candidate) {
+      assert.equal(candidate[0], 1, "contains the correct id");
+      assert.equal(candidate[1], "Candidate 1", "contains the correct name");
+      assert.equal(candidate[2], 0, "contains the correct votes count");
+      return electionInstance.candidates(2);
+    }).then(function(candidate) {
+      assert.equal(candidate[0], 2, "contains the correct id");
+      assert.equal(candidate[1], "Candidate 2", "contains the correct name");
+      assert.equal(candidate[2], 0, "contains the correct votes count");
+    });
+  });
+});
+```
+
+首先获取到合约并赋值给一个变量，接下来我们调用`contract`函数，并将所有的测试用例写入回调函数中。这个回调函数会提供账户变量"accounts"，它是由Ganache提供的代表在区块链上所有的账户。第一个测试用例校验参选人的个数为2，第二个测试用例校验每个参选人的信息是否正确。现在通过下面的命令来执行测试脚本
+
+    $ truffle test
+
+![](http://7xqutp.com1.z0.glb.clouddn.com/truffletest.png)
+
+看到了两个测试用例都通过的提示。
+
+#### 客户端应用
+
+
+### Reference
+* [The Ultimate Ethereum Dapp Tutorial ](http://www.dappuniversity.com/articles/the-ultimate-ethereum-dapp-tutorial)
+* 闫莺，郑凯，郭众鑫. 以太坊技术详解与实战[M]. 机械工业出版社, 2018.
