@@ -14,6 +14,7 @@ tags:
 ### 引言
 今天我们来体验一下在以太坊上构建一个投票DApp，最后的效果如下，每个投票人有两个参选人可选择投票，投票之后每个参选人票数加1，每个投票人只能投票一次。
 ![](http://7xqutp.com1.z0.glb.clouddn.com/elec1.png)
+
 那这个DApp有什么不同之处呢，这里从区块链的基础特点和以太坊的特点两个角度简单阐述一下。
 
 #### 区块链技术的所能解决的问题
@@ -185,7 +186,7 @@ contract("Election", function(accounts) {
 看到了两个测试用例都通过的提示。
 
 #### 客户端应用
-现在可以将客户端的前台界面写一下，这里只需将Truffle Pet Shop自动生成的index.html修改下成显示文章最开始展示那样，代码参看[这里](https://github.com/dappuniversity/election/blob/master/src/index.html)。接下来替换app.js中的代码
+现在可以将客户端的前台界面写一下，这里只需将Truffle Pet Shop自动生成的index.html修改下成文章最开始展示那样，代码参看[这里](https://github.com/dappuniversity/election/blob/master/src/index.html)。接下来替换app.js中的代码
 
 ```javascript
 App = {
@@ -331,11 +332,11 @@ $(function() {
 </form>
 ```
 
-最后更新下app.js文件，首先查询表单中的参选人，当我们调用智能合约中的投票函数时，我们将参选人id传递过去，该调用过程是异步的。此时我们在一个账户下选择一个参选人进行投票，会出现消耗gas的提示，选择SUBMIT，我们的投票信息就记录在区块链上了。
+最后更新下app.js文件，首先查询表单中的参选人，当我们调用智能合约中的投票函数时，我们将参选人id传递过去，该调用过程是异步的。此时我们在一个账户下选择一个参选人进行投票，会出现交易消耗gas的提示，选择SUBMIT，我们的投票信息就记录在区块链上了。
 
 ![](http://7xqutp.com1.z0.glb.clouddn.com/confirmtx.png)
 
-总体过程只是为了上手体验一下，好多细节都没有涉及到，同时对于该投票dApp还有好多功能可以完善，比如设定计时器，跟实际选举过程一样，投票是有时间限制的，同时还可以当时间到了之后宣布获胜者，对于投票人可以设定哪些人可以投票哪些人不具有投票权等等。总之通过这个demo感受了下基于以太坊的dApp开发风格，之后再补充下基础知识再来开发。
+总体过程只是为了上手体验一下，好多细节都没有涉及到，同时对于该投票dApp还有好多功能可以完善，比如设定计时器，跟实际选举过程一样，投票是有时间限制的，同时还可以当计时时间到了之后宣布获胜者，对于投票人可以设定哪些人可以投票哪些人不具有投票权等等。总之通过这个demo感受了下基于以太坊的dApp开发风格，之后再补充下基础知识再来开发。
 
 ### Reference
 * [The Ultimate Ethereum Dapp Tutorial ](http://www.dappuniversity.com/articles/the-ultimate-ethereum-dapp-tutorial)
