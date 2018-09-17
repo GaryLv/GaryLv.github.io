@@ -12,8 +12,8 @@ tags:
 ---
 
 ### 引言
-今天我们来体验一下在以太坊上构建一个投票DApp，
-// todo the final dapp display
+今天我们来体验一下在以太坊上构建一个投票DApp，最后的效果如下，每个投票人有两个参选人可选择投票，投票之后每个参选人票数加1，每个投票人只能投票一次。
+![](http://7xqutp.com1.z0.glb.clouddn.com/elec1.png)
 那这个DApp有什么不同之处呢，这里从区块链的基础特点和以太坊的特点两个角度简单阐述一下。
 
 #### 区块链技术的所能解决的问题
@@ -185,7 +185,157 @@ contract("Election", function(accounts) {
 看到了两个测试用例都通过的提示。
 
 #### 客户端应用
+现在可以将客户端的前台界面写一下，这里只需将Truffle Pet Shop自动生成的index.html修改下成显示文章最开始展示那样，代码参看[这里](https://github.com/dappuniversity/election/blob/master/src/index.html)。接下来替换app.js中的代码
 
+```javascript
+App = {
+  web3Provider: null,
+  contracts: {},
+  account: '0x0',
+
+  init: function() {
+    return App.initWeb3();
+  },
+
+  initWeb3: function() {
+    if (typeof web3 !== 'undefined') {
+      // If a web3 instance is already provided by Meta Mask.
+      App.web3Provider = web3.currentProvider;
+      web3 = new Web3(web3.currentProvider);
+    } else {
+      // Specify default instance if no web3 instance provided
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      web3 = new Web3(App.web3Provider);
+    }
+    return App.initContract();
+  },
+
+  initContract: function() {
+    $.getJSON("Election.json", function(election) {
+      // Instantiate a new truffle contract from the artifact
+      App.contracts.Election = TruffleContract(election);
+      // Connect provider to interact with contract
+      App.contracts.Election.setProvider(App.web3Provider);
+
+      return App.render();
+    });
+  },
+
+  render: function() {
+    var electionInstance;
+    var loader = $("#loader");
+    var content = $("#content");
+
+    loader.show();
+    content.hide();
+
+    // Load account data
+    web3.eth.getCoinbase(function(err, account) {
+      if (err === null) {
+        App.account = account;
+        $("#accountAddress").html("Your Account: " + account);
+      }
+    });
+
+    // Load contract data
+    App.contracts.Election.deployed().then(function(instance) {
+      electionInstance = instance;
+      return electionInstance.candidatesCount();
+    }).then(function(candidatesCount) {
+      var candidatesResults = $("#candidatesResults");
+      candidatesResults.empty();
+
+      for (var i = 1; i <= candidatesCount; i++) {
+        electionInstance.candidates(i).then(function(candidate) {
+          var id = candidate[0];
+          var name = candidate[1];
+          var voteCount = candidate[2];
+
+          // Render candidate Result
+          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td></tr>"
+          candidatesResults.append(candidateTemplate);
+        });
+      }
+
+      loader.hide();
+      content.show();
+    }).catch(function(error) {
+      console.warn(error);
+    });
+  }
+};
+
+$(function() {
+  $(window).load(function() {
+    App.init();
+  });
+});
+```
+
+上面代码主要做了这么几件事：
+1. 创建web3：web3.js是一个JavaScript库，通过RPC调用与本地节点通信，这里通过`initWeb3`函数来配置web3
+2. 初始化合约
+3. 渲染函数：渲染函数将智能合约中的数据展示在页面上
+
+重新部署合约后要启动服务器，命令如下
+
+    $ npm run dev
+
+这会自动打开浏览器以显示客户端的样子，不过客户端会只显示Loading，这是因为我们还没有登录到区块链中。这里我们首先需要通过MetaMask连接本地RPC，端口号在truffle.js配置文件中。
+
+![](http://7xqutp.com1.z0.glb.clouddn.com/customrpc.png)
+
+同时还要将自己本地的账户关联起来，本地的账户就在Ganache中，选择一个账户，点击它后面的小钥匙标签获取它的私钥，将其导入MetaMask中
+
+![](http://7xqutp.com1.z0.glb.clouddn.com/importacc.png)
+![](http://7xqutp.com1.z0.glb.clouddn.com/accmeta.png)
+
+此时我们可以看到已经关联到相应的账户，地址和账户里的eth也都对应。刷新页面发现已经能正常显示投票界面了。
+
+![](http://7xqutp.com1.z0.glb.clouddn.com/elec2.png)
+
+### 投票
+最后我们加入投票人，这里每个账户只能投一票，智能合约将记录这一切。
+
+    contract Election {
+      // ...
+      // Store accounts that have voted
+      mapping(address => bool) public voters;
+
+      // ...
+      function vote (uint _candidateId) public {
+          // require that they haven't voted before
+          require(!voters[msg.sender]);
+          // require a valid candidate
+          require(_candidateId > 0 && _candidateId <= candidatesCount);
+          // record that voter has voted
+          voters[msg.sender] = true;
+          // update candidate vote Count
+          candidates[_candidateId].voteCount ++;
+      }
+    }
+
+这里通过通过全局变量"msg.sender"获取账户，对未投票的标记为已投票并给它投票的参选人票数加1。
+
+接下来完善下投票界面，加上投票人选择参选人的功能，并可提交，在index.html加入
+
+```html
+<form onSubmit="App.castVote()">
+  <div class="form-group">
+    <label for="candidatesSelect">Select Candidate</label>
+    <select class="form-control" id="candidatesSelect">
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Vote</button>
+  <hr />
+</form>
+```
+
+最后更新下app.js文件，首先查询表单中的参选人，当我们调用智能合约中的投票函数时，我们将参选人id传递过去，该调用过程是异步的。此时我们在一个账户下选择一个参选人进行投票，会出现消耗gas的提示，选择SUBMIT，我们的投票信息就记录在区块链上了。
+
+![](http://7xqutp.com1.z0.glb.clouddn.com/confirmtx.png)
+
+总体过程只是为了上手体验一下，好多细节都没有涉及到，同时对于该投票dApp还有好多功能可以完善，比如设定计时器，跟实际选举过程一样，投票是有时间限制的，同时还可以当时间到了之后宣布获胜者，对于投票人可以设定哪些人可以投票哪些人不具有投票权等等。总之通过这个demo感受了下基于以太坊的dApp开发风格，之后再补充下基础知识再来开发。
 
 ### Reference
 * [The Ultimate Ethereum Dapp Tutorial ](http://www.dappuniversity.com/articles/the-ultimate-ethereum-dapp-tutorial)
