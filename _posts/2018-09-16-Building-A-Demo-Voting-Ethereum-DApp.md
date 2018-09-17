@@ -88,7 +88,7 @@ module.exports = function(deployer) {
 };
 ```
 
-这样我们就可以部署我们的智能合约了，需要注意的是下面的命令不能在windows cmd中执行，我是在git bash中执行的
+这样我们就可以部署我们的智能合约了，需要注意的是下面的命令不能在windows cmd中执行，这里是在git bash中执行的
 
     $ truffle migrate
 
